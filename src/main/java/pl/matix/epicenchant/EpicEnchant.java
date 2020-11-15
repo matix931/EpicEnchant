@@ -7,28 +7,32 @@ package pl.matix.epicenchant;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.permission.Permission;
+import org.apache.commons.io.FileUtils;
 import org.bukkit.Server;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
-import pl.matix.epicenchant.config.EpicEnchantConfig;
+import pl.matix.epicenchant.config.EeConfig;
 import pl.matix.epicenchant.enchants.EnchantmentsRegistry;
-import pl.matix.epicenchant.managers.EeEnchantmentsManager;
+import pl.matix.epicenchant.enchants.EeEnchantmentsManager;
 import pl.matix.epicenchant.listeners.EnchantingListener;
 import pl.matix.epicenchant.listeners.BlockBreakListener;
 import pl.matix.epicenchant.listeners.EeListener;
 import pl.matix.epicenchant.listeners.PlayerListener;
 import pl.matix.epicenchant.listeners.SignCreateListener;
-import pl.matix.epicenchant.locale.EpicEnchantLocale;
-import pl.matix.epicenchant.locale.EpicEnchantLocaleFile;
+import pl.matix.epicenchant.locale.EeLocale;
+import pl.matix.epicenchant.locale.EeLocaleFile;
 import pl.matix.epicenchant.locale.LocaleLanguage;
-import pl.matix.epicenchant.utils.SignHelper;
+import pl.matix.epicenchant.sign.SignHelper;
 
 /**
  *
@@ -43,10 +47,11 @@ public class EpicEnchant extends JavaPlugin {
     private Economy economy;
     private Permission perms;
     
-    private EpicEnchantConfig config;
+    private EeConfig config;
     
     private final String pluginName;
     private final String messagePrefix;
+    private final String logPrefix;
     private final String signPrefix;
     private final String signPrefixColored;
     
@@ -63,9 +68,10 @@ public class EpicEnchant extends JavaPlugin {
         this.pm = server.getPluginManager();
         this.log = server.getLogger();
         this.pluginName = getDescription().getName();
-        this.messagePrefix = "§3[§c" + pluginName + "§3]§f ";
+        this.messagePrefix = "§3[§c" + pluginName + "§3]§f";
+        this.logPrefix = "\033[0;36m[\033[0;31m" + pluginName + "\033[0;36m]\033[0m";
         this.signPrefix = "[" + pluginName.toLowerCase() + "]";
-        this.signPrefixColored = "§3[§c" + pluginName + "§3]§f ";
+        this.signPrefixColored = "§3[§c" + pluginName + "§3]§f";
         this.pluginFolderPath = "plugins/"+pluginName;
         
         this.signHelper = new SignHelper(this);
@@ -192,28 +198,28 @@ public class EpicEnchant extends JavaPlugin {
         return economy;
     }
 
-    public Logger getLog() {
-        return log;
-    }
-
     public EeEnchantmentsManager getEnchantments() {
         return enchantments;
     }
     
-    public void showConsoleError(String error) {
-        log.severe(String.format("[%s] %s", pluginName, error));
+    public void showConsoleError(String error, Object... args) {
+        log.log(Level.SEVERE, String.format("%s %s", logPrefix, error), args);
     }
     
-    public void showConsoleInfo(String info) {
-        log.info(String.format("[%s] %s", pluginName, info));
+    public void showConsoleInfo(String info, Object... args) {
+        log.log(Level.INFO, String.format("%s %s", logPrefix, info), args);
     }
     
     public void sendChatMessage(Player player, String msg) {
-        player.sendMessage(messagePrefix + msg);
+        player.sendMessage(String.format("%s %s", messagePrefix, msg));
     }
     
-    public void sendChatMessage(Player player, EpicEnchantLocale locale) {
-        player.sendMessage(messagePrefix + locale.getText());
+    public void sendChatMessage(Player player, EeLocale locale) {
+        player.sendMessage(String.format("%s %s", messagePrefix, locale.getText()));
+    }
+    
+    public void sendChatMessage(Player player, EeLocale locale, Map<String, String> params) {
+        player.sendMessage(String.format("%s %s", messagePrefix, locale.getText(params)));
     }
 
     public String getSignPrefix() {
@@ -233,14 +239,12 @@ public class EpicEnchant extends JavaPlugin {
         ObjectMapper om = new ObjectMapper();
         if(!configFile.exists()) {
             showConsoleInfo("No configuration file found, creating default one");
-            configFile.createNewFile();
-            config = new EpicEnchantConfig();
-            om.writerWithDefaultPrettyPrinter().writeValue(configFile, config);
-        } else {
-            showConsoleInfo("Loading configuration file");
-            config = om.readValue(configFile, EpicEnchantConfig.class);    
-            showConsoleInfo("Configuration file loaded");
+            InputStream is = getClass().getResourceAsStream("/config.json");
+            FileUtils.copyInputStreamToFile(is, configFile);
         }
+        showConsoleInfo("Loading configuration file");
+        config = om.readValue(configFile, EeConfig.class);    
+        showConsoleInfo("Configuration file loaded");
     }
 
     private void loadLocale() throws IOException {
@@ -250,10 +254,10 @@ public class EpicEnchant extends JavaPlugin {
         if(!localeFile.exists() && language == LocaleLanguage.EN) {
             //create default locale file
             localeFile.createNewFile();
-            EpicEnchantLocaleFile locale = EpicEnchantLocaleFile.createDefault();
+            EeLocaleFile locale = EeLocaleFile.createDefault();
             om.writerWithDefaultPrettyPrinter().writeValue(localeFile, locale);
         } else {
-            EpicEnchantLocaleFile locale = om.readValue(localeFile, EpicEnchantLocaleFile.class);
+            EeLocaleFile locale = om.readValue(localeFile, EeLocaleFile.class);
             locale.forEach((l, txt) -> {
                 l.setText(txt);
             });
@@ -274,6 +278,10 @@ public class EpicEnchant extends JavaPlugin {
 
     public EnchantmentsRegistry getEnchantRegistry() {
         return enchantRegistry;
+    }
+
+    public EeConfig getEeConfig() {
+        return config;
     }
     
 }

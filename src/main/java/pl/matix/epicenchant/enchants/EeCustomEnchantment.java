@@ -15,10 +15,6 @@ import pl.matix.epicenchant.EpicEnchant;
  */
 public abstract class EeCustomEnchantment extends Enchantment {
     
-    private static final String[] levelFormats = new String[] {
-        "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"
-    };
-    
     public EeCustomEnchantment(EpicEnchant ee, String name) {
         super(new NamespacedKey(ee, name));
     }
@@ -30,10 +26,7 @@ public abstract class EeCustomEnchantment extends Enchantment {
     }
     
     public String buildLoreEntry(int level) {
-        return buildLoreEntryPrefix() + " " + formatEnchantmentLevel(level);
+        return buildLoreEntryPrefix() + " " + EnchantmentsRegistry.formatLevel(level);
     }
     
-    public static String formatEnchantmentLevel(int level) {
-        return level > levelFormats.length ? String.valueOf(level) : levelFormats[level-1];
-    }
 }

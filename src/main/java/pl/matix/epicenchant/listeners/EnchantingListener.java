@@ -5,12 +5,7 @@
  */
 package pl.matix.epicenchant.listeners;
 
-import java.util.logging.Level;
-import org.bukkit.Bukkit;
-import org.bukkit.enchantments.Enchantment;
-import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.enchantment.EnchantItemEvent;
 import org.bukkit.event.inventory.PrepareAnvilEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;

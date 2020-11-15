@@ -1,0 +1,317 @@
+{
+    "language": "EN",
+    "enchantments": {
+        "FEATHER_FALLING": {
+            "actions": {
+                "UPGRADE": {
+                    "maxLevel": 8
+                },
+                "DOWNGRADE": {}
+            }
+        },
+        "FROST_WALKER": {
+            "actions": {
+                "UPGRADE": {
+                    "maxLevel": 2
+                },
+                "DOWNGRADE": {}
+            }
+        },
+        "UNBREAKING": {
+            "actions": {
+                "UPGRADE": {
+                    "maxLevel": 50
+                },
+                "DOWNGRADE": {}
+            }
+        },
+        "PROJECTILE_PROTECTION": {
+            "actions": {
+                "UPGRADE": {
+                    "maxLevel": 4
+                },
+                "DOWNGRADE": {}
+            }
+        },
+        "KNOCKBACK": {
+            "actions": {
+                "UPGRADE": {
+                    "maxLevel": 2
+                },
+                "DOWNGRADE": {}
+            }
+        },
+        "RESPIRATION": {
+            "actions": {
+                "UPGRADE": {
+                    "maxLevel": 40
+                },
+                "DOWNGRADE": {}
+            }
+        },
+        "PUNCH": {
+            "actions": {
+                "UPGRADE": {
+                    "maxLevel": 2
+                },
+                "DOWNGRADE": {}
+            }
+        },
+        "PROTECTION": {
+            "actions": {
+                "UPGRADE": {
+                    "maxLevel": 4
+                },
+                "DOWNGRADE": {}
+            }
+        },
+        "BLAST_PROTECTION": {
+            "actions": {
+                "UPGRADE": {
+                    "maxLevel": 4
+                },
+                "DOWNGRADE": {}
+            }
+        },
+        "LURE": {
+            "actions": {
+                "UPGRADE": {
+                    "maxLevel": 3
+                },
+                "DOWNGRADE": {}
+            }
+        },
+        "IMPALING": {
+            "actions": {
+                "UPGRADE": {
+                    "maxLevel": 5
+                },
+                "DOWNGRADE": {}
+            }
+        },
+        "SMITE": {
+            "actions": {
+                "UPGRADE": {
+                    "maxLevel": 5
+                },
+                "DOWNGRADE": {}
+            }
+        },
+        "SILK_TOUCH": {
+            "actions": {
+                "UPGRADE": {
+                    "maxLevel": 1
+                },
+                "DOWNGRADE": {}
+            }
+        },
+        "INFINITY": {
+            "actions": {
+                "UPGRADE": {
+                    "maxLevel": 1
+                },
+                "DOWNGRADE": {}
+            }
+        },
+        "THORNS": {
+            "actions": {
+                "UPGRADE": {
+                    "maxLevel": 3
+                },
+                "DOWNGRADE": {}
+            }
+        },
+        "LUCK_OF_THE_SEA": {
+            "actions": {
+                "UPGRADE": {
+                    "maxLevel": 3
+                },
+                "DOWNGRADE": {}
+            }
+        },
+        "MULTISHOT": {
+            "actions": {
+                "UPGRADE": {
+                    "maxLevel": 1
+                },
+                "DOWNGRADE": {}
+            }
+        },
+        "VANISHING_CURSE": {
+            "actions": {
+                "UPGRADE": {
+                    "maxLevel": 1
+                },
+                "DOWNGRADE": {}
+            }
+        },
+        "FIRE_ASPECT": {
+            "actions": {
+                "UPGRADE": {
+                    "maxLevel": 2
+                },
+                "DOWNGRADE": {}
+            }
+        },
+        "DEPTH_STRIDER": {
+            "actions": {
+                "UPGRADE": {
+                    "maxLevel": 3
+                },
+                "DOWNGRADE": {}
+            }
+        },
+        "FLAME": {
+            "actions": {
+                "UPGRADE": {
+                    "maxLevel": 1
+                },
+                "DOWNGRADE": {}
+            }
+        },
+        "PIERCING": {
+            "actions": {
+                "UPGRADE": {
+                    "maxLevel": 4
+                },
+                "DOWNGRADE": {}
+            }
+        },
+        "FIRE_PROTECTION": {
+            "actions": {
+                "UPGRADE": {
+                    "maxLevel": 4
+                },
+                "DOWNGRADE": {}
+            }
+        },
+        "SHARPNESS": {
+            "actions": {
+                "UPGRADE": {
+                    "maxLevel": 5
+                },
+                "DOWNGRADE": {}
+            }
+        },
+        "POWER": {
+            "actions": {
+                "UPGRADE": {
+                    "maxLevel": 5
+                },
+                "DOWNGRADE": {}
+            }
+        },
+        "SWEEPING": {
+            "actions": {
+                "UPGRADE": {
+                    "maxLevel": 3
+                },
+                "DOWNGRADE": {}
+            }
+        },
+        "AQUA_AFFINITY": {
+            "actions": {
+                "UPGRADE": {
+                    "maxLevel": 1
+                },
+                "DOWNGRADE": {}
+            }
+        },
+        "BINDING_CURSE": {
+            "actions": {
+                "UPGRADE": {
+                    "maxLevel": 1
+                },
+                "DOWNGRADE": {}
+            }
+        },
+        "BANE_OF_ARTHROPODS": {
+            "actions": {
+                "UPGRADE": {
+                    "maxLevel": 5
+                },
+                "DOWNGRADE": {}
+            }
+        },
+        "SOUL_SPEED": {
+            "actions": {
+                "UPGRADE": {
+                    "maxLevel": 10
+                },
+                "DOWNGRADE": {}
+            }
+        },
+        "LOOTING": {
+            "actions": {
+                "UPGRADE": {
+                    "maxLevel": 3
+                },
+                "DOWNGRADE": {}
+            }
+        },
+        "EFFICIENCY": {
+            "actions": {
+                "UPGRADE": {
+                    "maxLevel": 5
+                },
+                "DOWNGRADE": {}
+            }
+        },
+        "MENDING": {
+            "actions": {
+                "UPGRADE": {
+                    "maxLevel": 1
+                },
+                "DOWNGRADE": {}
+            }
+        },
+        "RIPTIDE": {
+            "actions": {
+                "UPGRADE": {
+                    "maxLevel": 3
+                },
+                "DOWNGRADE": {}
+            }
+        },
+        "QUICK_CHARGE": {
+            "actions": {
+                "UPGRADE": {
+                    "maxLevel": 3
+                },
+                "DOWNGRADE": {}
+            }
+        },
+        "FORTUNE": {
+            "actions": {
+                "UPGRADE": {
+                    "maxLevel": 10
+                },
+                "DOWNGRADE": {}
+            }
+        },
+        "LOYALTY": {
+            "actions": {
+                "UPGRADE": {
+                    "maxLevel": 3
+                },
+                "DOWNGRADE": {}
+            }
+        },
+        "CHANNELING": {
+            "actions": {
+                "UPGRADE": {
+                    "maxLevel": 1
+                },
+                "DOWNGRADE": {}
+            }
+        },
+        "DESTROYER": {
+            "actions": {
+                "UPGRADE": {
+                    "maxLevel": 2
+                },
+                "DOWNGRADE": {}
+            }
+        }
+    }
+}

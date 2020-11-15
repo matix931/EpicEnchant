@@ -59,7 +59,13 @@ public class DestroyerEnchantment extends EeCustomEnchantment {
 
     @Override
     public boolean canEnchantItem(ItemStack is) {
-        return true;
+        if(is == null || is.getAmount() !=1) {
+            return false;
+        }
+        if(is.getItemMeta() == null) {
+            return false;
+        }
+        return getItemTarget().includes(is);
     }
 
     @Override

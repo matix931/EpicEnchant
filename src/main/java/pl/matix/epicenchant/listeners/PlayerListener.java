@@ -5,6 +5,9 @@
  */
 package pl.matix.epicenchant.listeners;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.Sign;
@@ -13,8 +16,15 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerItemHeldEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import pl.matix.epicenchant.EpicEnchant;
+import pl.matix.epicenchant.config.EeConfigAction;
+import pl.matix.epicenchant.config.EeConfigEnchantEntry;
+import pl.matix.epicenchant.actions.EeActionHandler;
+import pl.matix.epicenchant.actions.EeActionType;
+import pl.matix.epicenchant.sign.SignHelper;
 
 /**
  *
@@ -22,10 +32,18 @@ import pl.matix.epicenchant.EpicEnchant;
  */
 public class PlayerListener extends EeListener {
 
+    private static final Map<UUID, Long> playersClicksMap = new HashMap<>();
+    
     public PlayerListener(EpicEnchant ee) {
         super(ee);
     }
 
+    @EventHandler
+    public void onPlayerItemHeld(PlayerItemHeldEvent event) {
+        Player player = event.getPlayer();
+        playersClicksMap.remove(player.getUniqueId());
+    }
+    
     @EventHandler
     public void onPlayerInteract(PlayerInteractEvent event) {
         Block block = event.getClickedBlock();
@@ -35,16 +53,38 @@ public class PlayerListener extends EeListener {
         BlockState state = block.getState();
         if (event.getAction() == Action.RIGHT_CLICK_BLOCK && state instanceof Sign) {
             Sign sign = (Sign) state;
-            if(ee.getSignHelper().isSignEpicEnchant(sign)) {
-                Enchantment enchantment = ee.getSignHelper().getEnchantmentFromSign(sign.getLines());
-                Player player = event.getPlayer();
-                ItemStack itemInHand = player.getInventory().getItemInMainHand();
-                if(itemInHand.getAmount() == 1) {
-                    boolean added = ee.getEnchantments().upgradeEnchantment(itemInHand, enchantment, 1);
-                    if(added) {
-                        ee.sendChatMessage(player, "Item enchanted successfully");
-                    }
-                }
+            Player player = event.getPlayer();
+            
+            final Long lastClickTime = playersClicksMap.get(player.getUniqueId());
+            playersClicksMap.remove(player.getUniqueId());
+            
+            if(!ee.getSignHelper().isSignEpicEnchant(sign)) {
+                return;
+            }
+            
+            final String[] lines = sign.getLines();
+            final ItemStack itemInHand = player.getInventory().getItemInMainHand();
+            final ItemMeta itemMeta = itemInHand.getItemMeta();
+            if(itemMeta == null) {
+                return;
+            }
+            final Enchantment enchantment = ee.getSignHelper().getEnchantmentFromSign(lines);
+            final int currentEnchantLevel = itemMeta.getEnchantLevel(enchantment);
+            final EeActionType actionType = ee.getSignHelper().getSignType(lines);
+            final EeConfigEnchantEntry config = ee.getEeConfig().getEnchantmentConfig(enchantment);
+            final EeActionHandler actionHandler = actionType.getActionHandler();
+            final EeConfigAction actionConfig = config.getActions().get(actionType);
+            
+            if(!actionHandler.validateBeforeAction(ee, player, itemInHand, enchantment, currentEnchantLevel, actionConfig)) {
+                return;
+            }
+            
+            final long currentTime = System.currentTimeMillis();
+            if(lastClickTime != null && (currentTime - lastClickTime) < 5000) {
+                actionHandler.performAction(ee, player, itemInHand, enchantment, currentEnchantLevel, actionConfig);
+            } else {
+                playersClicksMap.put(player.getUniqueId(), currentTime);
+                actionHandler.showInfoAction(ee, player, itemInHand, enchantment, currentEnchantLevel, actionConfig);
             }
         }
     }

@@ -10,8 +10,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.block.SignChangeEvent;
 import pl.matix.epicenchant.EpicEnchant;
-import pl.matix.epicenchant.locale.EpicEnchantLocale;
+import pl.matix.epicenchant.locale.EeLocale;
 import pl.matix.epicenchant.permissions.EpicEnchantPermission;
+import pl.matix.epicenchant.actions.EeActionType;
 
 /**
  *
@@ -39,19 +40,26 @@ public class SignCreateListener extends EeListener {
         final Player player = event.getPlayer();
         
         if (!player.isOp() && !EpicEnchantPermission.has(player, EpicEnchantPermission.SIGN_CREATE)) {
-            ee.sendChatMessage(player, EpicEnchantLocale.CREATE_SIGN_NO_PERMISSION);
+            ee.sendChatMessage(player, EeLocale.CREATE_SIGN_NO_PERMISSION);
             event.setCancelled(true);
             return;
         }
         
         Enchantment enchantment = ee.getSignHelper().getEnchantmentFromSign(lines);
         if(enchantment == null) {
-            ee.sendChatMessage(player, EpicEnchantLocale.UNRECOGNIZED_ENCHANTMENT);
+            ee.sendChatMessage(player, EeLocale.UNRECOGNIZED_ENCHANTMENT);
             event.setCancelled(true);
             return;
         }
         
-        ee.getSignHelper().updateSignLines(lines, enchantment);
+        EeActionType signType = ee.getSignHelper().getSignType(lines);
+        if(signType == null) {
+            ee.sendChatMessage(player, EeLocale.UNRECOGNIZED_SIGN_TYPE);
+            event.setCancelled(true);
+            return;
+        }
+        
+        ee.getSignHelper().updateSignLines(lines, enchantment, signType);
     }
     
 }

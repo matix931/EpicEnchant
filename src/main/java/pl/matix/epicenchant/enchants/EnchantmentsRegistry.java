@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-import java.util.logging.Level;
+import org.apache.commons.lang.WordUtils;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
 import pl.matix.epicenchant.EpicEnchant;
@@ -21,8 +21,20 @@ import pl.matix.epicenchant.EpicEnchant;
  */
 public class EnchantmentsRegistry {
     
-    private final Set<EeCustomEnchantment> enchantsList = new HashSet<>();
-    private final Map<String, Enchantment> otherEnchantsList = new HashMap<>();
+    public static final String[] LEVEL_FORMATS = new String[] {
+        "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"
+    };
+    
+    public static String formatLevel(int level) {
+        if(level<=0 || level > 10) {
+            return String.valueOf(level);
+        }
+        return LEVEL_FORMATS[level-1];
+    }
+    
+    private final Set<EeCustomEnchantment> customEnchants = new HashSet<>();
+    private final Map<String, Enchantment> otherEnchants = new HashMap<>();
+    private final Map<Enchantment, String> enchantsPrettyNames = new HashMap<>();
     
     public final DestroyerEnchantment DESTROYER;
     
@@ -31,49 +43,74 @@ public class EnchantmentsRegistry {
     public EnchantmentsRegistry(EpicEnchant ee) throws Exception {
         this.ee = ee;
         this.DESTROYER = createCustomEnchantment(DestroyerEnchantment.class);
+        
+        init();
     }
     
-    public void init() throws Exception {
+    private void init() throws Exception {
         Field byKeyField = Enchantment.class.getDeclaredField("byKey");
         byKeyField.setAccessible(true);
         HashMap<NamespacedKey, Enchantment> byKey = (HashMap<NamespacedKey, Enchantment>) byKeyField.get(null);
         byKey.forEach((k, e) -> {
             String key = k.getKey();
-            ee.getLog().log(Level.INFO, "Found enchantment: {0}", key);
-            otherEnchantsList.put(key.toLowerCase(), e);
+            ee.showConsoleInfo("Found enchantment: {0}", key);
+            otherEnchants.put(key.toLowerCase(), e);
+            registerPrettyName(e);
         });
         byKeyField.setAccessible(false);
     }
     
     private <T extends EeCustomEnchantment> T createCustomEnchantment(Class<T> clz) throws Exception {
         T enchant = clz.getConstructor(EpicEnchant.class).newInstance(ee);
-        enchantsList.add(enchant);
+        customEnchants.add(enchant);
+        registerPrettyName(enchant);
         return enchant;
     }
     
-    public Enchantment getEnchantmentByKey(String s) {
+    public Enchantment getEnchantmentByKey(String s, boolean startsWith) {
         if(s == null || s.isEmpty()) {
             return null;
         }
-        s = s.toLowerCase();
-        Enchantment e = otherEnchantsList.get(s);
-        if(e != null) {
-            return e;
+        s = s.trim().toLowerCase().replace(" ", "_");
+        for(Enchantment e : otherEnchants.values()) {
+            if(startsWith) {
+                if(e.getKey().getKey().toLowerCase().startsWith(s)) {
+                    return e;
+                }
+            } else {
+                if(e.getKey().getKey().toLowerCase().equals(s)) {
+                    return e;
+                }    
+            }
         }
-        for(EeCustomEnchantment ce : enchantsList) {
-            if(ce.getKey().getKey().toLowerCase().equals(s)) {
-                return ce;
+        for(EeCustomEnchantment ce : customEnchants) {
+            if(startsWith) {
+                if(ce.getKey().getKey().toLowerCase().startsWith(s)) {
+                    return ce;
+                }
+            } else {
+                if(ce.getKey().getKey().toLowerCase().equals(s)) {
+                    return ce;
+                }    
             }
         }
         return null;
     }
+    
+    private void registerPrettyName(Enchantment e) {
+        enchantsPrettyNames.put(e, WordUtils.capitalizeFully(e.getKey().getKey().replace("_", " ")));
+    }
+    
+    public String getPrettyName(Enchantment e) {
+        return enchantsPrettyNames.get(e);
+    }
 
     public Set<EeCustomEnchantment> getCustomEnchants() {
-        return enchantsList;
+        return customEnchants;
     }
 
     public Map<String, Enchantment> getOtherEnchants() {
-        return otherEnchantsList;
+        return otherEnchants;
     }
     
 }
