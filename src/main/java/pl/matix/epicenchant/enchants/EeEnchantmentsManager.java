@@ -83,24 +83,20 @@ public class EeEnchantmentsManager {
         return false;
     }
     
-    public boolean upgradeEnchantment(ItemStack is, Enchantment e, int plusLevels) {
+    public void upgradeEnchantment(ItemStack is, Enchantment e, int plusLevels) {
         ItemMeta meta = is.getItemMeta();
-        if(meta!=null) {
-            int level = meta.getEnchantLevel(e);
-            level += plusLevels;
-            level = Math.min(level, 127);
-            if(level <= 0) {
-                meta.removeEnchant(e);
-            } else {
-                meta.addEnchant(e, level, true);
-            }
-            if(e instanceof  EeCustomEnchantment) {
-                updateLore(meta, (EeCustomEnchantment) e, level);
-            }
-            is.setItemMeta(meta);
-            return true;
+        int level = meta.getEnchantLevel(e);
+        level += plusLevels;
+        level = Math.min(level, 127);
+        if(level <= 0) {
+            meta.removeEnchant(e);
+        } else {
+            meta.addEnchant(e, level, true);
         }
-        return false;
+        if(e instanceof  EeCustomEnchantment) {
+            updateLore(meta, (EeCustomEnchantment) e, level);
+        }
+        is.setItemMeta(meta);
     }
     
     public boolean isConflicting(ItemStack is, Enchantment newEnchantment) {

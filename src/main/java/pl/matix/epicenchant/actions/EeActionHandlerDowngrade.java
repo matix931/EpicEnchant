@@ -36,28 +36,32 @@ public class EeActionHandlerDowngrade extends EeActionHandler<EeConfigActionDown
 
     @Override
     public void performAction(EpicEnchant ee, Player player, ItemStack is, Enchantment e, int currentEnchantLevel, EeConfigActionDowngrade config) {
-        final boolean removed = ee.getEnchantments().upgradeEnchantment(is, e, -1);
-        if(removed) {
-            String eName = ee.getEnchantRegistry().getPrettyName(e);
-            final String lvl = EnchantmentsRegistry.formatLevel(currentEnchantLevel-1);
-            Map<String, String> params = new HashMap<>();
-            params.put("enchant", eName);
-            params.put("level", lvl);
-            ee.sendChatMessage(player, EeLocale.DOWNGRADED_SUCCESSFULLY, params);
+        long cost = EeCostsCalculator.calculateDowngradeCost(ee, e, currentEnchantLevel);
+        double playerMoney = ee.getEconomy().getBalance(player);
+        if(playerMoney < cost) {
+            ee.sendChatMessage(player, EeLocale.NOT_ENOUGH_MONEY);
+            return;
         }
+        
+        ee.getEnchantments().upgradeEnchantment(is, e, -1);
+        ee.getEconomy().withdrawPlayer(player, cost);
+        String eName = ee.getEnchantRegistry().getPrettyName(e);
+        final String lvl = EnchantmentsRegistry.formatLevel(currentEnchantLevel-1);
+        Map<String, String> params = new HashMap<>();
+        params.put("enchant", eName);
+        params.put("level", lvl);
+        ee.sendChatMessage(player, EeLocale.DOWNGRADED_SUCCESSFULLY, params);
     }
 
     @Override
     public void showInfoAction(EpicEnchant ee, Player player, ItemStack is, Enchantment e, int currentEnchantLevel, EeConfigActionDowngrade config) {
         String eName = ee.getEnchantRegistry().getPrettyName(e);
-        int cost = 0;
-        int chance = 25;
+        long cost = EeCostsCalculator.calculateDowngradeCost(ee, e, currentEnchantLevel);
         final String lvl = EnchantmentsRegistry.formatLevel(currentEnchantLevel-1);
         Map<String, String> params = new HashMap<>();
         params.put("enchant", eName);
         params.put("level", lvl);
         params.put("cost", String.valueOf(cost));
-        params.put("chance", chance+"%");
         ee.sendChatMessage(player, EeLocale.DOWNGRADE_INFO, params);
     }
     

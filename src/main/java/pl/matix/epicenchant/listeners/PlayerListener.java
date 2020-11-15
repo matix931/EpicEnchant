@@ -8,6 +8,8 @@ package pl.matix.epicenchant.listeners;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+import org.apache.commons.lang3.tuple.Pair;
+import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.Sign;
@@ -24,7 +26,6 @@ import pl.matix.epicenchant.config.EeConfigAction;
 import pl.matix.epicenchant.config.EeConfigEnchantEntry;
 import pl.matix.epicenchant.actions.EeActionHandler;
 import pl.matix.epicenchant.actions.EeActionType;
-import pl.matix.epicenchant.sign.SignHelper;
 
 /**
  *
@@ -32,7 +33,7 @@ import pl.matix.epicenchant.sign.SignHelper;
  */
 public class PlayerListener extends EeListener {
 
-    private static final Map<UUID, Long> playersClicksMap = new HashMap<>();
+    private static final Map<UUID, Pair<Long, Location>> playersClicksMap = new HashMap<>();
     
     public PlayerListener(EpicEnchant ee) {
         super(ee);
@@ -55,7 +56,11 @@ public class PlayerListener extends EeListener {
             Sign sign = (Sign) state;
             Player player = event.getPlayer();
             
-            final Long lastClickTime = playersClicksMap.get(player.getUniqueId());
+            Pair<Long, Location> pair = playersClicksMap.get(player.getUniqueId());
+            Long lastClickTime = null;
+            if(pair != null && pair.getRight().equals(block.getLocation())) {
+                lastClickTime = pair.getLeft();
+            }
             playersClicksMap.remove(player.getUniqueId());
             
             if(!ee.getSignHelper().isSignEpicEnchant(sign)) {
@@ -83,7 +88,7 @@ public class PlayerListener extends EeListener {
             if(lastClickTime != null && (currentTime - lastClickTime) < 5000) {
                 actionHandler.performAction(ee, player, itemInHand, enchantment, currentEnchantLevel, actionConfig);
             } else {
-                playersClicksMap.put(player.getUniqueId(), currentTime);
+                playersClicksMap.put(player.getUniqueId(), Pair.of(currentTime, block.getLocation()));
                 actionHandler.showInfoAction(ee, player, itemInHand, enchantment, currentEnchantLevel, actionConfig);
             }
         }

@@ -1,316 +1,876 @@
 {
     "language": "EN",
+    "globalUpgradeCosts": {
+        "minValue": 5000,
+        "levelPower": 2.0,
+        "levelMultiplier": 5000,
+        "exactValues": []
+    },
+    "globalUpgradeChances": {
+        "minValue": 1,
+        "levelPower": 1.5,
+        "levelMultiplier": 5,
+        "exactValues": []
+    },
+    "globalDowngradeCostPart": 0.1,
+    "globalUpgradeDowngradeOnFail": false,
     "enchantments": {
         "FEATHER_FALLING": {
             "actions": {
                 "UPGRADE": {
-                    "maxLevel": 8
+                    "maxLevel": 8,
+                    "costs": {
+                        "minValueModifier": 1.0,
+                        "levelPowerModifier": 1.0,
+                        "levelMultiplierModifier": 1.0,
+                        "exactValues": []
+                    },
+                    "chances": {
+                        "minValueModifier": 1.0,
+                        "levelPowerModifier": 1.0,
+                        "levelMultiplierModifier": 1.0,
+                        "exactValues": []
+                    }
                 },
-                "DOWNGRADE": {}
+                "DOWNGRADE": {
+                    "costPartModifier": 1.0
+                }
             }
         },
         "FROST_WALKER": {
             "actions": {
                 "UPGRADE": {
-                    "maxLevel": 2
+                    "maxLevel": 2,
+                    "costs": {
+                        "minValueModifier": 1.0,
+                        "levelPowerModifier": 1.0,
+                        "levelMultiplierModifier": 1.0,
+                        "exactValues": []
+                    },
+                    "chances": {
+                        "minValueModifier": 1.0,
+                        "levelPowerModifier": 1.0,
+                        "levelMultiplierModifier": 1.0,
+                        "exactValues": []
+                    }
                 },
-                "DOWNGRADE": {}
+                "DOWNGRADE": {
+                    "costPartModifier": 1.0
+                }
             }
         },
         "UNBREAKING": {
             "actions": {
                 "UPGRADE": {
-                    "maxLevel": 50
+                    "maxLevel": 50,
+                    "costs": {
+                        "minValueModifier": 1.0,
+                        "levelPowerModifier": 1.0,
+                        "levelMultiplierModifier": 1.0,
+                        "exactValues": []
+                    },
+                    "chances": {
+                        "minValueModifier": 1.0,
+                        "levelPowerModifier": 1.0,
+                        "levelMultiplierModifier": 1.0,
+                        "exactValues": []
+                    }
                 },
-                "DOWNGRADE": {}
+                "DOWNGRADE": {
+                    "costPartModifier": 1.0
+                }
             }
         },
         "PROJECTILE_PROTECTION": {
             "actions": {
                 "UPGRADE": {
-                    "maxLevel": 4
+                    "maxLevel": 10,
+                    "costs": {
+                        "minValueModifier": 1.0,
+                        "levelPowerModifier": 1.0,
+                        "levelMultiplierModifier": 1.0,
+                        "exactValues": []
+                    },
+                    "chances": {
+                        "minValueModifier": 1.0,
+                        "levelPowerModifier": 1.0,
+                        "levelMultiplierModifier": 1.0,
+                        "exactValues": []
+                    }
                 },
-                "DOWNGRADE": {}
+                "DOWNGRADE": {
+                    "costPartModifier": 1.0
+                }
             }
         },
         "KNOCKBACK": {
             "actions": {
                 "UPGRADE": {
-                    "maxLevel": 2
+                    "maxLevel": 3,
+                    "costs": {
+                        "minValueModifier": 1.0,
+                        "levelPowerModifier": 1.0,
+                        "levelMultiplierModifier": 1.0,
+                        "exactValues": []
+                    },
+                    "chances": {
+                        "minValueModifier": 1.0,
+                        "levelPowerModifier": 1.0,
+                        "levelMultiplierModifier": 1.0,
+                        "exactValues": []
+                    }
                 },
-                "DOWNGRADE": {}
+                "DOWNGRADE": {
+                    "costPartModifier": 1.0
+                }
             }
         },
         "RESPIRATION": {
             "actions": {
                 "UPGRADE": {
-                    "maxLevel": 40
+                    "maxLevel": 40,
+                    "costs": {
+                        "minValueModifier": 1.0,
+                        "levelPowerModifier": 1.0,
+                        "levelMultiplierModifier": 1.0,
+                        "exactValues": []
+                    },
+                    "chances": {
+                        "minValueModifier": 1.0,
+                        "levelPowerModifier": 1.0,
+                        "levelMultiplierModifier": 1.0,
+                        "exactValues": []
+                    }
                 },
-                "DOWNGRADE": {}
+                "DOWNGRADE": {
+                    "costPartModifier": 1.0
+                }
             }
         },
         "PUNCH": {
             "actions": {
                 "UPGRADE": {
-                    "maxLevel": 2
+                    "maxLevel": 3,
+                    "costs": {
+                        "minValueModifier": 1.0,
+                        "levelPowerModifier": 1.0,
+                        "levelMultiplierModifier": 1.0,
+                        "exactValues": []
+                    },
+                    "chances": {
+                        "minValueModifier": 1.0,
+                        "levelPowerModifier": 1.0,
+                        "levelMultiplierModifier": 1.0,
+                        "exactValues": []
+                    }
                 },
-                "DOWNGRADE": {}
+                "DOWNGRADE": {
+                    "costPartModifier": 1.0
+                }
             }
         },
         "PROTECTION": {
             "actions": {
                 "UPGRADE": {
-                    "maxLevel": 4
+                    "maxLevel": 10,
+                    "costs": {
+                        "minValueModifier": 1.0,
+                        "levelPowerModifier": 1.0,
+                        "levelMultiplierModifier": 1.0,
+                        "exactValues": []
+                    },
+                    "chances": {
+                        "minValueModifier": 1.0,
+                        "levelPowerModifier": 1.0,
+                        "levelMultiplierModifier": 1.0,
+                        "exactValues": []
+                    }
                 },
-                "DOWNGRADE": {}
+                "DOWNGRADE": {
+                    "costPartModifier": 1.0
+                }
             }
         },
         "BLAST_PROTECTION": {
             "actions": {
                 "UPGRADE": {
-                    "maxLevel": 4
+                    "maxLevel": 10,
+                    "costs": {
+                        "minValueModifier": 1.0,
+                        "levelPowerModifier": 1.0,
+                        "levelMultiplierModifier": 1.0,
+                        "exactValues": []
+                    },
+                    "chances": {
+                        "minValueModifier": 1.0,
+                        "levelPowerModifier": 1.0,
+                        "levelMultiplierModifier": 1.0,
+                        "exactValues": []
+                    }
                 },
-                "DOWNGRADE": {}
+                "DOWNGRADE": {
+                    "costPartModifier": 1.0
+                }
             }
         },
         "LURE": {
             "actions": {
                 "UPGRADE": {
-                    "maxLevel": 3
+                    "maxLevel": 3,
+                    "costs": {
+                        "minValueModifier": 1.0,
+                        "levelPowerModifier": 1.0,
+                        "levelMultiplierModifier": 1.0,
+                        "exactValues": []
+                    },
+                    "chances": {
+                        "minValueModifier": 1.0,
+                        "levelPowerModifier": 1.0,
+                        "levelMultiplierModifier": 1.0,
+                        "exactValues": []
+                    }
                 },
-                "DOWNGRADE": {}
+                "DOWNGRADE": {
+                    "costPartModifier": 1.0
+                }
             }
         },
         "IMPALING": {
             "actions": {
                 "UPGRADE": {
-                    "maxLevel": 5
+                    "maxLevel": 5,
+                    "costs": {
+                        "minValueModifier": 1.0,
+                        "levelPowerModifier": 1.0,
+                        "levelMultiplierModifier": 1.0,
+                        "exactValues": []
+                    },
+                    "chances": {
+                        "minValueModifier": 1.0,
+                        "levelPowerModifier": 1.0,
+                        "levelMultiplierModifier": 1.0,
+                        "exactValues": []
+                    }
                 },
-                "DOWNGRADE": {}
+                "DOWNGRADE": {
+                    "costPartModifier": 1.0
+                }
             }
         },
         "SMITE": {
             "actions": {
                 "UPGRADE": {
-                    "maxLevel": 5
+                    "maxLevel": 10,
+                    "costs": {
+                        "minValueModifier": 1.0,
+                        "levelPowerModifier": 1.0,
+                        "levelMultiplierModifier": 1.0,
+                        "exactValues": []
+                    },
+                    "chances": {
+                        "minValueModifier": 1.0,
+                        "levelPowerModifier": 1.0,
+                        "levelMultiplierModifier": 1.0,
+                        "exactValues": []
+                    }
                 },
-                "DOWNGRADE": {}
+                "DOWNGRADE": {
+                    "costPartModifier": 1.0
+                }
             }
         },
         "SILK_TOUCH": {
             "actions": {
                 "UPGRADE": {
-                    "maxLevel": 1
+                    "maxLevel": 1,
+                    "costs": {
+                        "minValueModifier": 1.0,
+                        "levelPowerModifier": 1.0,
+                        "levelMultiplierModifier": 1.0,
+                        "exactValues": []
+                    },
+                    "chances": {
+                        "minValueModifier": 1.0,
+                        "levelPowerModifier": 1.0,
+                        "levelMultiplierModifier": 1.0,
+                        "exactValues": []
+                    }
                 },
-                "DOWNGRADE": {}
+                "DOWNGRADE": {
+                    "costPartModifier": 1.0
+                }
             }
         },
         "INFINITY": {
             "actions": {
                 "UPGRADE": {
-                    "maxLevel": 1
+                    "maxLevel": 1,
+                    "costs": {
+                        "minValueModifier": 1.0,
+                        "levelPowerModifier": 1.0,
+                        "levelMultiplierModifier": 1.0,
+                        "exactValues": []
+                    },
+                    "chances": {
+                        "minValueModifier": 1.0,
+                        "levelPowerModifier": 1.0,
+                        "levelMultiplierModifier": 1.0,
+                        "exactValues": []
+                    }
                 },
-                "DOWNGRADE": {}
+                "DOWNGRADE": {
+                    "costPartModifier": 1.0
+                }
             }
         },
         "THORNS": {
             "actions": {
                 "UPGRADE": {
-                    "maxLevel": 3
+                    "maxLevel": 6,
+                    "costs": {
+                        "minValueModifier": 1.0,
+                        "levelPowerModifier": 1.0,
+                        "levelMultiplierModifier": 1.0,
+                        "exactValues": []
+                    },
+                    "chances": {
+                        "minValueModifier": 1.0,
+                        "levelPowerModifier": 1.0,
+                        "levelMultiplierModifier": 1.0,
+                        "exactValues": []
+                    }
                 },
-                "DOWNGRADE": {}
+                "DOWNGRADE": {
+                    "costPartModifier": 1.0
+                }
             }
         },
         "LUCK_OF_THE_SEA": {
             "actions": {
                 "UPGRADE": {
-                    "maxLevel": 3
+                    "maxLevel": 50,
+                    "costs": {
+                        "minValueModifier": 1.0,
+                        "levelPowerModifier": 1.0,
+                        "levelMultiplierModifier": 1.0,
+                        "exactValues": []
+                    },
+                    "chances": {
+                        "minValueModifier": 1.0,
+                        "levelPowerModifier": 1.0,
+                        "levelMultiplierModifier": 1.0,
+                        "exactValues": []
+                    }
                 },
-                "DOWNGRADE": {}
+                "DOWNGRADE": {
+                    "costPartModifier": 1.0
+                }
             }
         },
         "MULTISHOT": {
             "actions": {
                 "UPGRADE": {
-                    "maxLevel": 1
+                    "maxLevel": 1,
+                    "costs": {
+                        "minValueModifier": 1.0,
+                        "levelPowerModifier": 1.0,
+                        "levelMultiplierModifier": 1.0,
+                        "exactValues": []
+                    },
+                    "chances": {
+                        "minValueModifier": 1.0,
+                        "levelPowerModifier": 1.0,
+                        "levelMultiplierModifier": 1.0,
+                        "exactValues": []
+                    }
                 },
-                "DOWNGRADE": {}
+                "DOWNGRADE": {
+                    "costPartModifier": 1.0
+                }
             }
         },
         "VANISHING_CURSE": {
             "actions": {
                 "UPGRADE": {
-                    "maxLevel": 1
+                    "maxLevel": 1,
+                    "costs": {
+                        "minValueModifier": 1.0,
+                        "levelPowerModifier": 1.0,
+                        "levelMultiplierModifier": 1.0,
+                        "exactValues": []
+                    },
+                    "chances": {
+                        "minValueModifier": 1.0,
+                        "levelPowerModifier": 1.0,
+                        "levelMultiplierModifier": 1.0,
+                        "exactValues": []
+                    }
                 },
-                "DOWNGRADE": {}
+                "DOWNGRADE": {
+                    "costPartModifier": 1.0
+                }
             }
         },
         "FIRE_ASPECT": {
             "actions": {
                 "UPGRADE": {
-                    "maxLevel": 2
+                    "maxLevel": 5,
+                    "costs": {
+                        "minValueModifier": 1.0,
+                        "levelPowerModifier": 1.0,
+                        "levelMultiplierModifier": 1.0,
+                        "exactValues": []
+                    },
+                    "chances": {
+                        "minValueModifier": 1.0,
+                        "levelPowerModifier": 1.0,
+                        "levelMultiplierModifier": 1.0,
+                        "exactValues": []
+                    }
                 },
-                "DOWNGRADE": {}
+                "DOWNGRADE": {
+                    "costPartModifier": 1.0
+                }
             }
         },
         "DEPTH_STRIDER": {
             "actions": {
                 "UPGRADE": {
-                    "maxLevel": 3
+                    "maxLevel": 3,
+                    "costs": {
+                        "minValueModifier": 1.0,
+                        "levelPowerModifier": 1.0,
+                        "levelMultiplierModifier": 1.0,
+                        "exactValues": []
+                    },
+                    "chances": {
+                        "minValueModifier": 1.0,
+                        "levelPowerModifier": 1.0,
+                        "levelMultiplierModifier": 1.0,
+                        "exactValues": []
+                    }
                 },
-                "DOWNGRADE": {}
+                "DOWNGRADE": {
+                    "costPartModifier": 1.0
+                }
             }
         },
         "FLAME": {
             "actions": {
                 "UPGRADE": {
-                    "maxLevel": 1
+                    "maxLevel": 2,
+                    "costs": {
+                        "minValueModifier": 1.0,
+                        "levelPowerModifier": 1.0,
+                        "levelMultiplierModifier": 1.0,
+                        "exactValues": []
+                    },
+                    "chances": {
+                        "minValueModifier": 1.0,
+                        "levelPowerModifier": 1.0,
+                        "levelMultiplierModifier": 1.0,
+                        "exactValues": []
+                    }
                 },
-                "DOWNGRADE": {}
+                "DOWNGRADE": {
+                    "costPartModifier": 1.0
+                }
             }
         },
         "PIERCING": {
             "actions": {
                 "UPGRADE": {
-                    "maxLevel": 4
+                    "maxLevel": 10,
+                    "costs": {
+                        "minValueModifier": 1.0,
+                        "levelPowerModifier": 1.0,
+                        "levelMultiplierModifier": 1.0,
+                        "exactValues": []
+                    },
+                    "chances": {
+                        "minValueModifier": 1.0,
+                        "levelPowerModifier": 1.0,
+                        "levelMultiplierModifier": 1.0,
+                        "exactValues": []
+                    }
                 },
-                "DOWNGRADE": {}
+                "DOWNGRADE": {
+                    "costPartModifier": 1.0
+                }
             }
         },
         "FIRE_PROTECTION": {
             "actions": {
                 "UPGRADE": {
-                    "maxLevel": 4
+                    "maxLevel": 10,
+                    "costs": {
+                        "minValueModifier": 1.0,
+                        "levelPowerModifier": 1.0,
+                        "levelMultiplierModifier": 1.0,
+                        "exactValues": []
+                    },
+                    "chances": {
+                        "minValueModifier": 1.0,
+                        "levelPowerModifier": 1.0,
+                        "levelMultiplierModifier": 1.0,
+                        "exactValues": []
+                    }
                 },
-                "DOWNGRADE": {}
+                "DOWNGRADE": {
+                    "costPartModifier": 1.0
+                }
             }
         },
         "SHARPNESS": {
             "actions": {
                 "UPGRADE": {
-                    "maxLevel": 5
+                    "maxLevel": 10,
+                    "costs": {
+                        "minValueModifier": 1.0,
+                        "levelPowerModifier": 1.0,
+                        "levelMultiplierModifier": 1.0,
+                        "exactValues": []
+                    },
+                    "chances": {
+                        "minValueModifier": 1.0,
+                        "levelPowerModifier": 1.0,
+                        "levelMultiplierModifier": 1.0,
+                        "exactValues": []
+                    }
                 },
-                "DOWNGRADE": {}
+                "DOWNGRADE": {
+                    "costPartModifier": 1.0
+                }
             }
         },
         "POWER": {
             "actions": {
                 "UPGRADE": {
-                    "maxLevel": 5
+                    "maxLevel": 10,
+                    "costs": {
+                        "minValueModifier": 1.0,
+                        "levelPowerModifier": 1.0,
+                        "levelMultiplierModifier": 1.0,
+                        "exactValues": []
+                    },
+                    "chances": {
+                        "minValueModifier": 1.0,
+                        "levelPowerModifier": 1.0,
+                        "levelMultiplierModifier": 1.0,
+                        "exactValues": []
+                    }
                 },
-                "DOWNGRADE": {}
+                "DOWNGRADE": {
+                    "costPartModifier": 1.0
+                }
             }
         },
         "SWEEPING": {
             "actions": {
                 "UPGRADE": {
-                    "maxLevel": 3
+                    "maxLevel": 3,
+                    "costs": {
+                        "minValueModifier": 1.0,
+                        "levelPowerModifier": 1.0,
+                        "levelMultiplierModifier": 1.0,
+                        "exactValues": []
+                    },
+                    "chances": {
+                        "minValueModifier": 1.0,
+                        "levelPowerModifier": 1.0,
+                        "levelMultiplierModifier": 1.0,
+                        "exactValues": []
+                    }
                 },
-                "DOWNGRADE": {}
+                "DOWNGRADE": {
+                    "costPartModifier": 1.0
+                }
             }
         },
         "AQUA_AFFINITY": {
             "actions": {
                 "UPGRADE": {
-                    "maxLevel": 1
+                    "maxLevel": 1,
+                    "costs": {
+                        "minValueModifier": 1.0,
+                        "levelPowerModifier": 1.0,
+                        "levelMultiplierModifier": 1.0,
+                        "exactValues": []
+                    },
+                    "chances": {
+                        "minValueModifier": 1.0,
+                        "levelPowerModifier": 1.0,
+                        "levelMultiplierModifier": 1.0,
+                        "exactValues": []
+                    }
                 },
-                "DOWNGRADE": {}
+                "DOWNGRADE": {
+                    "costPartModifier": 1.0
+                }
             }
         },
         "BINDING_CURSE": {
             "actions": {
                 "UPGRADE": {
-                    "maxLevel": 1
+                    "maxLevel": 1,
+                    "costs": {
+                        "minValueModifier": 1.0,
+                        "levelPowerModifier": 1.0,
+                        "levelMultiplierModifier": 1.0,
+                        "exactValues": []
+                    },
+                    "chances": {
+                        "minValueModifier": 1.0,
+                        "levelPowerModifier": 1.0,
+                        "levelMultiplierModifier": 1.0,
+                        "exactValues": []
+                    }
                 },
-                "DOWNGRADE": {}
+                "DOWNGRADE": {
+                    "costPartModifier": 1.0
+                }
             }
         },
         "BANE_OF_ARTHROPODS": {
             "actions": {
                 "UPGRADE": {
-                    "maxLevel": 5
+                    "maxLevel": 10,
+                    "costs": {
+                        "minValueModifier": 1.0,
+                        "levelPowerModifier": 1.0,
+                        "levelMultiplierModifier": 1.0,
+                        "exactValues": []
+                    },
+                    "chances": {
+                        "minValueModifier": 1.0,
+                        "levelPowerModifier": 1.0,
+                        "levelMultiplierModifier": 1.0,
+                        "exactValues": []
+                    }
                 },
-                "DOWNGRADE": {}
+                "DOWNGRADE": {
+                    "costPartModifier": 1.0
+                }
             }
         },
         "SOUL_SPEED": {
             "actions": {
                 "UPGRADE": {
-                    "maxLevel": 10
+                    "maxLevel": 10,
+                    "costs": {
+                        "minValueModifier": 1.0,
+                        "levelPowerModifier": 1.0,
+                        "levelMultiplierModifier": 1.0,
+                        "exactValues": []
+                    },
+                    "chances": {
+                        "minValueModifier": 1.0,
+                        "levelPowerModifier": 1.0,
+                        "levelMultiplierModifier": 1.0,
+                        "exactValues": []
+                    }
                 },
-                "DOWNGRADE": {}
+                "DOWNGRADE": {
+                    "costPartModifier": 1.0
+                }
             }
         },
         "LOOTING": {
             "actions": {
                 "UPGRADE": {
-                    "maxLevel": 3
+                    "maxLevel": 10,
+                    "costs": {
+                        "minValueModifier": 1.0,
+                        "levelPowerModifier": 1.0,
+                        "levelMultiplierModifier": 1.0,
+                        "exactValues": []
+                    },
+                    "chances": {
+                        "minValueModifier": 1.0,
+                        "levelPowerModifier": 1.0,
+                        "levelMultiplierModifier": 1.0,
+                        "exactValues": []
+                    }
                 },
-                "DOWNGRADE": {}
+                "DOWNGRADE": {
+                    "costPartModifier": 1.0
+                }
             }
         },
         "EFFICIENCY": {
             "actions": {
                 "UPGRADE": {
-                    "maxLevel": 5
+                    "maxLevel": 10,
+                    "costs": {
+                        "minValueModifier": 1.0,
+                        "levelPowerModifier": 1.0,
+                        "levelMultiplierModifier": 1.0,
+                        "exactValues": []
+                    },
+                    "chances": {
+                        "minValueModifier": 1.0,
+                        "levelPowerModifier": 1.0,
+                        "levelMultiplierModifier": 1.0,
+                        "exactValues": []
+                    }
                 },
-                "DOWNGRADE": {}
+                "DOWNGRADE": {
+                    "costPartModifier": 1.0
+                }
             }
         },
         "MENDING": {
             "actions": {
                 "UPGRADE": {
-                    "maxLevel": 1
+                    "maxLevel": 1,
+                    "costs": {
+                        "minValueModifier": 1.0,
+                        "levelPowerModifier": 1.0,
+                        "levelMultiplierModifier": 1.0,
+                        "exactValues": []
+                    },
+                    "chances": {
+                        "minValueModifier": 1.0,
+                        "levelPowerModifier": 1.0,
+                        "levelMultiplierModifier": 1.0,
+                        "exactValues": []
+                    }
                 },
-                "DOWNGRADE": {}
+                "DOWNGRADE": {
+                    "costPartModifier": 1.0
+                }
             }
         },
         "RIPTIDE": {
             "actions": {
                 "UPGRADE": {
-                    "maxLevel": 3
+                    "maxLevel": 10,
+                    "costs": {
+                        "minValueModifier": 1.0,
+                        "levelPowerModifier": 1.0,
+                        "levelMultiplierModifier": 1.0,
+                        "exactValues": []
+                    },
+                    "chances": {
+                        "minValueModifier": 1.0,
+                        "levelPowerModifier": 1.0,
+                        "levelMultiplierModifier": 1.0,
+                        "exactValues": []
+                    }
                 },
-                "DOWNGRADE": {}
+                "DOWNGRADE": {
+                    "costPartModifier": 1.0
+                }
             }
         },
         "QUICK_CHARGE": {
             "actions": {
                 "UPGRADE": {
-                    "maxLevel": 3
+                    "maxLevel": 8,
+                    "costs": {
+                        "minValueModifier": 1.0,
+                        "levelPowerModifier": 1.0,
+                        "levelMultiplierModifier": 1.0,
+                        "exactValues": []
+                    },
+                    "chances": {
+                        "minValueModifier": 1.0,
+                        "levelPowerModifier": 1.0,
+                        "levelMultiplierModifier": 1.0,
+                        "exactValues": []
+                    }
                 },
-                "DOWNGRADE": {}
+                "DOWNGRADE": {
+                    "costPartModifier": 1.0
+                }
             }
         },
         "FORTUNE": {
             "actions": {
                 "UPGRADE": {
-                    "maxLevel": 10
+                    "maxLevel": 10,
+                    "costs": {
+                        "minValueModifier": 1.0,
+                        "levelPowerModifier": 1.0,
+                        "levelMultiplierModifier": 1.0,
+                        "exactValues": []
+                    },
+                    "chances": {
+                        "minValueModifier": 1.0,
+                        "levelPowerModifier": 1.0,
+                        "levelMultiplierModifier": 1.0,
+                        "exactValues": []
+                    }
                 },
-                "DOWNGRADE": {}
+                "DOWNGRADE": {
+                    "costPartModifier": 1.0
+                }
             }
         },
         "LOYALTY": {
             "actions": {
                 "UPGRADE": {
-                    "maxLevel": 3
+                    "maxLevel": 10,
+                    "costs": {
+                        "minValueModifier": 1.0,
+                        "levelPowerModifier": 1.0,
+                        "levelMultiplierModifier": 1.0,
+                        "exactValues": []
+                    },
+                    "chances": {
+                        "minValueModifier": 1.0,
+                        "levelPowerModifier": 1.0,
+                        "levelMultiplierModifier": 1.0,
+                        "exactValues": []
+                    }
                 },
-                "DOWNGRADE": {}
+                "DOWNGRADE": {
+                    "costPartModifier": 1.0
+                }
             }
         },
         "CHANNELING": {
             "actions": {
                 "UPGRADE": {
-                    "maxLevel": 1
+                    "maxLevel": 1,
+                    "costs": {
+                        "minValueModifier": 1.0,
+                        "levelPowerModifier": 1.0,
+                        "levelMultiplierModifier": 1.0,
+                        "exactValues": []
+                    },
+                    "chances": {
+                        "minValueModifier": 1.0,
+                        "levelPowerModifier": 1.0,
+                        "levelMultiplierModifier": 1.0,
+                        "exactValues": []
+                    }
                 },
-                "DOWNGRADE": {}
+                "DOWNGRADE": {
+                    "costPartModifier": 1.0
+                }
             }
         },
         "DESTROYER": {
             "actions": {
                 "UPGRADE": {
-                    "maxLevel": 2
+                    "maxLevel": 2,
+                    "costs": {
+                        "minValueModifier": 1.0,
+                        "levelPowerModifier": 1.0,
+                        "levelMultiplierModifier": 1.0,
+                        "exactValues": [500000, 2500000]
+                    },
+                    "chances": {
+                        "minValueModifier": 1.0,
+                        "levelPowerModifier": 1.0,
+                        "levelMultiplierModifier": 1.0,
+                        "exactValues": []
+                    }
                 },
-                "DOWNGRADE": {}
+                "DOWNGRADE": {
+                    "costPartModifier": 1.0
+                }
             }
         }
     }

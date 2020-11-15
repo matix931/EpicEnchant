@@ -5,7 +5,6 @@
  */
 package pl.matix.epicenchant.actions;
 
-import pl.matix.epicenchant.actions.EeActionType;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;

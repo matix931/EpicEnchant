@@ -17,6 +17,12 @@ import pl.matix.epicenchant.locale.LocaleLanguage;
 public class EeConfig {
     
     private LocaleLanguage language = LocaleLanguage.EN;
+    
+    private EeConfigGlobalUpgradeCosts globalUpgradeCosts;
+    private EeConfigGlobalUpgradeChances globalUpgradeChances;
+    private double globalDowngradeCostPart;
+    private Boolean globalUpgradeDowngradeOnFail;
+    
     private Map<String, EeConfigEnchantEntry> enchantments = new HashMap<>();
 
     public EeConfig() {
@@ -42,4 +48,37 @@ public class EeConfig {
     public EeConfigEnchantEntry getEnchantmentConfig(Enchantment e) {
         return enchantments.get(e.getKey().getKey().toUpperCase());
     }
+
+    public double getGlobalDowngradeCostPart() {
+        return globalDowngradeCostPart;
+    }
+
+    public void setGlobalDowngradeCostPart(double globalDowngradeCostPart) {
+        this.globalDowngradeCostPart = globalDowngradeCostPart;
+    }
+
+    public EeConfigGlobalUpgradeCosts getGlobalUpgradeCosts() {
+        return globalUpgradeCosts;
+    }
+
+    public void setGlobalUpgradeCosts(EeConfigGlobalUpgradeCosts globalUpgradeCosts) {
+        this.globalUpgradeCosts = globalUpgradeCosts;
+    }
+
+    public EeConfigGlobalUpgradeChances getGlobalUpgradeChances() {
+        return globalUpgradeChances;
+    }
+
+    public void setGlobalUpgradeChances(EeConfigGlobalUpgradeChances globalUpgradeChances) {
+        this.globalUpgradeChances = globalUpgradeChances;
+    }
+
+    public Boolean getGlobalUpgradeDowngradeOnFail() {
+        return globalUpgradeDowngradeOnFail;
+    }
+
+    public void setGlobalUpgradeDowngradeOnFail(Boolean globalUpgradeDowngradeOnFail) {
+        this.globalUpgradeDowngradeOnFail = globalUpgradeDowngradeOnFail;
+    }
+    
 }

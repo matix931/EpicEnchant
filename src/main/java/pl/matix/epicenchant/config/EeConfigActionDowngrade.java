@@ -5,12 +5,20 @@
  */
 package pl.matix.epicenchant.config;
 
-import pl.matix.epicenchant.actions.EeActionType;
-
 /**
  *
  * @author Mati
  */
 public class EeConfigActionDowngrade extends EeConfigAction {
 
+    private Double costPartModifier;
+
+    public void setCostPartModifier(Double costPartModifier) {
+        this.costPartModifier = costPartModifier;
+    }
+
+    public Double getCostPartModifier() {
+        return costPartModifier;
+    }
+    
 }

@@ -12,6 +12,9 @@ package pl.matix.epicenchant.config;
 public class EeConfigActionUpgrade extends EeConfigAction {
     
     private int maxLevel;
+    private EeConfigActionUpgradeCosts costs;
+    private EeConfigActionUpgradeChances chances;
+    private Boolean downgradeOnFail;
 
     public int getMaxLevel() {
         return maxLevel;
@@ -20,5 +23,29 @@ public class EeConfigActionUpgrade extends EeConfigAction {
     public void setMaxLevel(int maxLevel) {
         this.maxLevel = maxLevel;
     }
-    
+
+    public EeConfigActionUpgradeCosts getCosts() {
+        return costs;
+    }
+
+    public void setCosts(EeConfigActionUpgradeCosts costs) {
+        this.costs = costs;
+    }
+
+    public void setChances(EeConfigActionUpgradeChances chances) {
+        this.chances = chances;
+    }
+
+    public EeConfigActionUpgradeChances getChances() {
+        return chances;
+    }
+
+    public Boolean getDowngradeOnFail() {
+        return downgradeOnFail;
+    }
+
+    public void setDowngradeOnFail(Boolean downgradeOnFail) {
+        this.downgradeOnFail = downgradeOnFail;
+    }
+   
 }
