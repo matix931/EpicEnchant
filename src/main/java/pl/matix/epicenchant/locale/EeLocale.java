@@ -14,7 +14,8 @@ import java.util.Map;
  */
 public enum EeLocale {
     
-    CREATE_SIGN_NO_PERMISSION("You don't have permission"),
+    NO_PERMISSION("You don't have permission"),
+    CREATE_SIGN_SUCCESS("Enchantment sign created!"),
     UNRECOGNIZED_ENCHANTMENT("Unrecognized enchantment"),
     UNRECOGNIZED_SIGN_TYPE("Unrecognized sign type"),
     CANT_ENCHANT("You can not enchant this item with that enchantment"),
@@ -27,7 +28,10 @@ public enum EeLocale {
     DOWNGRADED_SUCCESSFULLY("Enchantment downgraded successfully to ${enchant} ${level}"),
     DOWNGRADE_INFO("Click again to downgrade ${enchant} to ${level} for ${cost}$"),
     ITEM_MISSING_ENCHANT("Item is missing this enchantment"),
-    NOT_ENOUGH_MONEY("You do not have enough money")
+    NOT_ENOUGH_MONEY("You do not have enough money"),
+    RANDOM_INFO("Random enchantment upgrade for this item will cost ${cost}"),
+    RANDOM_TOO_FEW_ENCHANTMENTS_TO_ROLL("There are too few enchantments to roll random enchantment"),
+    RANDOM_SUCCESSFULLY("Random enchantment applied: ${enchant} ${level}")
     ;
     
     public static final Map<String, EeLocale> map = new HashMap<>();

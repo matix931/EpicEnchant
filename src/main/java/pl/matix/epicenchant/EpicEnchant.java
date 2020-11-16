@@ -7,14 +7,12 @@ package pl.matix.epicenchant;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import net.milkbowl.vault.economy.Economy;
-import net.milkbowl.vault.permission.Permission;
 import org.apache.commons.io.FileUtils;
 import org.bukkit.Server;
 import org.bukkit.entity.Player;
@@ -31,7 +29,6 @@ import pl.matix.epicenchant.listeners.PlayerListener;
 import pl.matix.epicenchant.listeners.SignCreateListener;
 import pl.matix.epicenchant.locale.EeLocale;
 import pl.matix.epicenchant.locale.EeLocaleFile;
-import pl.matix.epicenchant.locale.LocaleLanguage;
 import pl.matix.epicenchant.sign.SignHelper;
 
 /**
@@ -45,7 +42,6 @@ public class EpicEnchant extends JavaPlugin {
     private final Logger log;
     
     private Economy economy;
-    private Permission perms;
     
     private EeConfig config;
     
@@ -97,11 +93,6 @@ public class EpicEnchant extends JavaPlugin {
             pm.disablePlugin(this);
             return;
         }
-        if(!setupPermissions()) {
-            showConsoleError("Disabled due to no Vault [Permissions] dependency found!");
-            pm.disablePlugin(this);
-            return;
-        }
         
         try {
             loadConfig();
@@ -111,6 +102,8 @@ public class EpicEnchant extends JavaPlugin {
             pm.disablePlugin(this);
             return;
         }
+        
+        this.enchantRegistry.initAfterConfigLoad();
         
         try {
             loadLocale();
@@ -168,15 +161,6 @@ public class EpicEnchant extends JavaPlugin {
         return economy != null;
     }
     
-    private boolean setupPermissions() {
-        RegisteredServiceProvider<Permission> rsp = server.getServicesManager().getRegistration(Permission.class);
-        if (rsp == null) {
-            return false;
-        }
-        perms = rsp.getProvider();
-        return perms != null;
-    }
-    
     private void setupListeners() throws Exception {
         registerListener(BlockBreakListener.class);
         registerListener(SignCreateListener.class);
@@ -188,10 +172,6 @@ public class EpicEnchant extends JavaPlugin {
     private void registerListener(Class<? extends EeListener> listener) throws Exception {
         EeListener ll = listener.getConstructor(EpicEnchant.class).newInstance(this);
         pm.registerEvents(ll, this);
-    }
-
-    public Permission getPerms() {
-        return perms;
     }
 
     public Economy getEconomy() {
@@ -248,20 +228,40 @@ public class EpicEnchant extends JavaPlugin {
     }
 
     private void loadLocale() throws IOException {
-        LocaleLanguage language = config.getLanguage();
-        File localeFile = new File(pluginFolderPath + "/locale_"+language.name().toLowerCase()+".json");
-        ObjectMapper om = new ObjectMapper();
-        if(!localeFile.exists() && language == LocaleLanguage.EN) {
-            //create default locale file
-            localeFile.createNewFile();
-            EeLocaleFile locale = EeLocaleFile.createDefault();
-            om.writerWithDefaultPrettyPrinter().writeValue(localeFile, locale);
-        } else {
-            EeLocaleFile locale = om.readValue(localeFile, EeLocaleFile.class);
-            locale.forEach((l, txt) -> {
-                l.setText(txt);
-            });
+        String language = config.getLanguage().toLowerCase();
+        
+        File localeFileFolder = new File(pluginFolderPath + "/locale");
+        if(!localeFileFolder.exists()) {
+            localeFileFolder.mkdir();    
         }
+        
+        ObjectMapper om = new ObjectMapper();
+        File enLocaleFile = new File(pluginFolderPath + "/locale/locale_en.json");
+        if(!enLocaleFile.exists()) {
+            enLocaleFile.createNewFile();
+            EeLocaleFile locale = EeLocaleFile.createDefault();
+            om.writerWithDefaultPrettyPrinter().writeValue(enLocaleFile, locale);
+        }
+        
+        String[] additionalLangs = new String[] { "pl", "de" };
+        for(String lang : additionalLangs) {
+            final String subPath = "/locale/locale_"+lang+".json";
+            File adLoc = new File(pluginFolderPath + subPath);
+            if(!adLoc.exists()) {
+                InputStream is = getClass().getResourceAsStream(subPath);
+                FileUtils.copyInputStreamToFile(is, adLoc);
+            }
+        }
+        
+        File localeFile = new File(pluginFolderPath + "/locale/locale_"+language+".json");
+        if(!localeFile.exists()) {
+            localeFile = enLocaleFile;
+        } 
+        
+        EeLocaleFile locale = om.readValue(localeFile, EeLocaleFile.class);
+        locale.forEach((l, txt) -> {
+            l.setText(txt);
+        });
     }
 
     public SignHelper getSignHelper() {

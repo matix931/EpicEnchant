@@ -1,0 +1,20 @@
+{
+  "NO_PERMISSION" : "Du hast keine Erlaubnis",
+  "CREATE_SIGN_SUCCESS" : "Verzauberungszeichen erstellt!",
+  "UNRECOGNIZED_ENCHANTMENT" : "Unrecognized enchantment",
+  "UNRECOGNIZED_SIGN_TYPE" : "Nicht erkannte Verzauberung",
+  "CANT_ENCHANT" : "Sie können diesen Gegenstand nicht mit dieser Verzauberung verzaubern",
+  "MAX_ENCHANT_LEVEL_REACHED" : "Maximale Verzauberungsstufe erreicht!",
+  "ENCHANT_COLLISION" : "Diese Verzauberung steht im Widerspruch zu anderen Verzauberungen",
+  "UPGRADE_INFO" : "Klicken Sie erneut, um ${enchant} für ${cost}$ mit ${chance} Chance auf $ ${level} zu aktualisieren",
+  "UPGRADED_SUCCESSFULLY" : "Verzauberung erfolgreich auf ${enchant} ${level} aktualisiert",
+  "UPGRADE_FAILED" : "Upgrade der Verzauberung fehlgeschlagen",
+  "UPGRADE_FAILED_WITH_DOWNGRADE" : "Das Upgrade der Verzauberung ist fehlgeschlagen. Die Verzauberung wurde auf ${enchant} ${level} herabgestuft.",
+  "DOWNGRADED_SUCCESSFULLY" : "Verzauberung erfolgreich auf ${enchant} ${level} herabgestuft",
+  "DOWNGRADE_INFO" : "Klicken Sie erneut, um ${enchant} für ${cost}$ auf ${level} herunterzustufen.",
+  "ITEM_MISSING_ENCHANT" : "Gegenstand fehlt diese Verzauberung",
+  "NOT_ENOUGH_MONEY" : "Du hast nicht genug Geld",
+  "RANDOM_INFO" : "Ein zufälliges Verzauberungs-Upgrade für diesen Gegenstand kostet ${cost}",
+  "RANDOM_TOO_FEW_ENCHANTMENTS_TO_ROLL" : "Es gibt zu wenig Verzauberungen, um zufällige Verzauberungen zu würfeln",
+  "RANDOM_SUCCESSFULLY" : "Zufällige Verzauberung angewendet: ${enchant} ${level}"
+}

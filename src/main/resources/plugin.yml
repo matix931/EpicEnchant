@@ -1,5 +1,42 @@
 name: EpicEnchant
-main: pl.matix.epicenchant.EpicEnchant
 version: 1.0
+description: Upgrade your enchantments like in rpg style game. Fully configurable!
+author: MatiXOR
+main: pl.matix.epicenchant.EpicEnchant
 api-version: 1.16
 depend: [Vault]
+
+permissions:
+    epicenchant.create:
+        default: false
+        description: Create [EpicEnchant] signs
+    epicenchant.use:
+        default: true
+        description: User [EpicEnchant] signs    
+    epicenchant.upgrade.fail_downgrade_immunity:
+        default: false
+        description: No downgrade on enchanting failure
+    epicenchant.upgrade.cost.percent90:
+        default: false
+        description: Enchanting cost decrase to 90%
+    epicenchant.upgrade.cost.percent75:
+        default: false
+        description: Enchanting cost decrase to 75%
+    epicenchant.upgrade.cost.percent50:
+        default: false
+        description: Enchanting cost decrase to 50%
+    epicenchant.upgrade.cost.percent25:
+        default: false
+        description: Enchanting cost decrase to 25%
+    epicenchant.upgrade.chance.percent150:
+        default: false
+        description: Enchanting chance incrased by 150%
+    epicenchant.upgrade.chance.percent200:
+        default: false
+        description: Enchanting chance incrased by 200%
+    epicenchant.upgrade.chance.percent300:
+        default: false
+        description: Enchanting chance incrased by 300%
+    epicenchant.upgrade.chance.percent500:
+        default: false
+        description: Enchanting chance incrased by 500%

@@ -14,10 +14,17 @@
     },
     "globalDowngradeCostPart": 0.1,
     "globalUpgradeDowngradeOnFail": false,
+    "random": {
+        "minCost": 50000,
+        "maxCost": null,
+        "costMultiplier": 1.5,
+        "minEnchantmentPoolSize": 3
+    },
     "enchantments": {
         "FEATHER_FALLING": {
             "actions": {
                 "UPGRADE": {
+                    "randomWeight": 100,
                     "maxLevel": 8,
                     "costs": {
                         "minValueModifier": 1.0,
@@ -40,6 +47,7 @@
         "FROST_WALKER": {
             "actions": {
                 "UPGRADE": {
+                    "randomWeight": 100,
                     "maxLevel": 2,
                     "costs": {
                         "minValueModifier": 1.0,
@@ -62,6 +70,7 @@
         "UNBREAKING": {
             "actions": {
                 "UPGRADE": {
+                    "randomWeight": 100,
                     "maxLevel": 50,
                     "costs": {
                         "minValueModifier": 1.0,
@@ -84,6 +93,7 @@
         "PROJECTILE_PROTECTION": {
             "actions": {
                 "UPGRADE": {
+                    "randomWeight": 100,
                     "maxLevel": 10,
                     "costs": {
                         "minValueModifier": 1.0,
@@ -106,6 +116,7 @@
         "KNOCKBACK": {
             "actions": {
                 "UPGRADE": {
+                    "randomWeight": 100,
                     "maxLevel": 3,
                     "costs": {
                         "minValueModifier": 1.0,
@@ -128,6 +139,7 @@
         "RESPIRATION": {
             "actions": {
                 "UPGRADE": {
+                    "randomWeight": 100,
                     "maxLevel": 40,
                     "costs": {
                         "minValueModifier": 1.0,
@@ -150,6 +162,7 @@
         "PUNCH": {
             "actions": {
                 "UPGRADE": {
+                    "randomWeight": 100,
                     "maxLevel": 3,
                     "costs": {
                         "minValueModifier": 1.0,
@@ -172,6 +185,7 @@
         "PROTECTION": {
             "actions": {
                 "UPGRADE": {
+                    "randomWeight": 100,
                     "maxLevel": 10,
                     "costs": {
                         "minValueModifier": 1.0,
@@ -194,6 +208,7 @@
         "BLAST_PROTECTION": {
             "actions": {
                 "UPGRADE": {
+                    "randomWeight": 100,
                     "maxLevel": 10,
                     "costs": {
                         "minValueModifier": 1.0,
@@ -216,6 +231,7 @@
         "LURE": {
             "actions": {
                 "UPGRADE": {
+                    "randomWeight": 100,
                     "maxLevel": 3,
                     "costs": {
                         "minValueModifier": 1.0,
@@ -238,6 +254,7 @@
         "IMPALING": {
             "actions": {
                 "UPGRADE": {
+                    "randomWeight": 100,
                     "maxLevel": 5,
                     "costs": {
                         "minValueModifier": 1.0,
@@ -260,6 +277,7 @@
         "SMITE": {
             "actions": {
                 "UPGRADE": {
+                    "randomWeight": 100,
                     "maxLevel": 10,
                     "costs": {
                         "minValueModifier": 1.0,
@@ -282,6 +300,7 @@
         "SILK_TOUCH": {
             "actions": {
                 "UPGRADE": {
+                    "randomWeight": 100,
                     "maxLevel": 1,
                     "costs": {
                         "minValueModifier": 1.0,
@@ -304,6 +323,7 @@
         "INFINITY": {
             "actions": {
                 "UPGRADE": {
+                    "randomWeight": 100,
                     "maxLevel": 1,
                     "costs": {
                         "minValueModifier": 1.0,
@@ -326,6 +346,7 @@
         "THORNS": {
             "actions": {
                 "UPGRADE": {
+                    "randomWeight": 100,
                     "maxLevel": 6,
                     "costs": {
                         "minValueModifier": 1.0,
@@ -348,6 +369,7 @@
         "LUCK_OF_THE_SEA": {
             "actions": {
                 "UPGRADE": {
+                    "randomWeight": 100,
                     "maxLevel": 50,
                     "costs": {
                         "minValueModifier": 1.0,
@@ -370,6 +392,7 @@
         "MULTISHOT": {
             "actions": {
                 "UPGRADE": {
+                    "randomWeight": 100,
                     "maxLevel": 1,
                     "costs": {
                         "minValueModifier": 1.0,
@@ -392,6 +415,7 @@
         "VANISHING_CURSE": {
             "actions": {
                 "UPGRADE": {
+                    "randomWeight": 100,
                     "maxLevel": 1,
                     "costs": {
                         "minValueModifier": 1.0,
@@ -414,6 +438,7 @@
         "FIRE_ASPECT": {
             "actions": {
                 "UPGRADE": {
+                    "randomWeight": 100,
                     "maxLevel": 5,
                     "costs": {
                         "minValueModifier": 1.0,
@@ -436,6 +461,7 @@
         "DEPTH_STRIDER": {
             "actions": {
                 "UPGRADE": {
+                    "randomWeight": 100,
                     "maxLevel": 3,
                     "costs": {
                         "minValueModifier": 1.0,
@@ -458,6 +484,7 @@
         "FLAME": {
             "actions": {
                 "UPGRADE": {
+                    "randomWeight": 100,
                     "maxLevel": 2,
                     "costs": {
                         "minValueModifier": 1.0,
@@ -480,6 +507,7 @@
         "PIERCING": {
             "actions": {
                 "UPGRADE": {
+                    "randomWeight": 100,
                     "maxLevel": 10,
                     "costs": {
                         "minValueModifier": 1.0,
@@ -502,6 +530,7 @@
         "FIRE_PROTECTION": {
             "actions": {
                 "UPGRADE": {
+                    "randomWeight": 100,
                     "maxLevel": 10,
                     "costs": {
                         "minValueModifier": 1.0,
@@ -524,6 +553,7 @@
         "SHARPNESS": {
             "actions": {
                 "UPGRADE": {
+                    "randomWeight": 100,
                     "maxLevel": 10,
                     "costs": {
                         "minValueModifier": 1.0,
@@ -546,6 +576,7 @@
         "POWER": {
             "actions": {
                 "UPGRADE": {
+                    "randomWeight": 100,
                     "maxLevel": 10,
                     "costs": {
                         "minValueModifier": 1.0,
@@ -568,6 +599,7 @@
         "SWEEPING": {
             "actions": {
                 "UPGRADE": {
+                    "randomWeight": 100,
                     "maxLevel": 3,
                     "costs": {
                         "minValueModifier": 1.0,
@@ -590,6 +622,7 @@
         "AQUA_AFFINITY": {
             "actions": {
                 "UPGRADE": {
+                    "randomWeight": 100,
                     "maxLevel": 1,
                     "costs": {
                         "minValueModifier": 1.0,
@@ -612,6 +645,7 @@
         "BINDING_CURSE": {
             "actions": {
                 "UPGRADE": {
+                    "randomWeight": 100,
                     "maxLevel": 1,
                     "costs": {
                         "minValueModifier": 1.0,
@@ -634,6 +668,7 @@
         "BANE_OF_ARTHROPODS": {
             "actions": {
                 "UPGRADE": {
+                    "randomWeight": 100,
                     "maxLevel": 10,
                     "costs": {
                         "minValueModifier": 1.0,
@@ -656,6 +691,7 @@
         "SOUL_SPEED": {
             "actions": {
                 "UPGRADE": {
+                    "randomWeight": 100,
                     "maxLevel": 10,
                     "costs": {
                         "minValueModifier": 1.0,
@@ -678,6 +714,7 @@
         "LOOTING": {
             "actions": {
                 "UPGRADE": {
+                    "randomWeight": 100,
                     "maxLevel": 10,
                     "costs": {
                         "minValueModifier": 1.0,
@@ -700,6 +737,7 @@
         "EFFICIENCY": {
             "actions": {
                 "UPGRADE": {
+                    "randomWeight": 100,
                     "maxLevel": 10,
                     "costs": {
                         "minValueModifier": 1.0,
@@ -722,6 +760,7 @@
         "MENDING": {
             "actions": {
                 "UPGRADE": {
+                    "randomWeight": 100,
                     "maxLevel": 1,
                     "costs": {
                         "minValueModifier": 1.0,
@@ -744,6 +783,7 @@
         "RIPTIDE": {
             "actions": {
                 "UPGRADE": {
+                    "randomWeight": 100,
                     "maxLevel": 10,
                     "costs": {
                         "minValueModifier": 1.0,
@@ -766,6 +806,7 @@
         "QUICK_CHARGE": {
             "actions": {
                 "UPGRADE": {
+                    "randomWeight": 100,
                     "maxLevel": 8,
                     "costs": {
                         "minValueModifier": 1.0,
@@ -788,6 +829,7 @@
         "FORTUNE": {
             "actions": {
                 "UPGRADE": {
+                    "randomWeight": 100,
                     "maxLevel": 10,
                     "costs": {
                         "minValueModifier": 1.0,
@@ -810,6 +852,7 @@
         "LOYALTY": {
             "actions": {
                 "UPGRADE": {
+                    "randomWeight": 100,
                     "maxLevel": 10,
                     "costs": {
                         "minValueModifier": 1.0,
@@ -832,6 +875,7 @@
         "CHANNELING": {
             "actions": {
                 "UPGRADE": {
+                    "randomWeight": 100,
                     "maxLevel": 1,
                     "costs": {
                         "minValueModifier": 1.0,
@@ -854,6 +898,7 @@
         "DESTROYER": {
             "actions": {
                 "UPGRADE": {
+                    "randomWeight": 10,
                     "maxLevel": 2,
                     "costs": {
                         "minValueModifier": 1.0,

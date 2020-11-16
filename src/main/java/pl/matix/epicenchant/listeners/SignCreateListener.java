@@ -39,8 +39,8 @@ public class SignCreateListener extends EeListener {
         
         final Player player = event.getPlayer();
         
-        if (!player.isOp() && !EpicEnchantPermission.has(player, EpicEnchantPermission.SIGN_CREATE)) {
-            ee.sendChatMessage(player, EeLocale.CREATE_SIGN_NO_PERMISSION);
+        if (!EpicEnchantPermission.has(player, EpicEnchantPermission.SIGN_CREATE)) {
+            ee.sendChatMessage(player, EeLocale.NO_PERMISSION);
             event.setCancelled(true);
             return;
         }
@@ -60,6 +60,7 @@ public class SignCreateListener extends EeListener {
         }
         
         ee.getSignHelper().updateSignLines(lines, enchantment, signType);
+        ee.sendChatMessage(player, EeLocale.CREATE_SIGN_SUCCESS);
     }
     
 }

@@ -10,6 +10,7 @@ import java.util.List;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
+import org.bukkit.block.Sign;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -18,6 +19,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import pl.matix.epicenchant.EpicEnchant;
 import pl.matix.epicenchant.events.DestroyerBlockBreakEvent;
+import pl.matix.epicenchant.locale.EeLocale;
+import pl.matix.epicenchant.permissions.EpicEnchantPermission;
 import pl.matix.epicenchant.utils.BlockGroupTool;
 import pl.matix.epicenchant.utils.BlockHelper;
 import pl.matix.epicenchant.utils.ToolGroup;
@@ -46,6 +49,19 @@ public class BlockBreakListener extends EeListener {
         if(!player.isOnline()) {
             return;
         }
+
+        final Block block = event.getBlock();        
+        if(block instanceof Sign) {
+            Sign sign = (Sign) block;
+            if(ee.getSignHelper().isSignEpicEnchant(sign)) {
+                if (!EpicEnchantPermission.has(player, EpicEnchantPermission.SIGN_CREATE)) {
+                    ee.sendChatMessage(player, EeLocale.NO_PERMISSION);
+                    event.setCancelled(true);
+                    return;
+                }
+            }
+        }
+        
         ItemStack is = player.getInventory().getItemInMainHand();
         ItemMeta meta = is.getItemMeta();
         if(meta == null) {
@@ -61,7 +77,6 @@ public class BlockBreakListener extends EeListener {
             if(toolGroup == null) {
                 return;
             }
-            final Block block = event.getBlock();            
             BlockGroupTool blockGroup = BlockGroupTool.getGroupByBlock(block);
             if(blockGroup == null) {
                 return;

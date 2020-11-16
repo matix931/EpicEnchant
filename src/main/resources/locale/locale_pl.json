@@ -1,0 +1,20 @@
+{
+  "NO_PERMISSION" : "Nie masz uprawnień",
+  "CREATE_SIGN_SUCCESS" : "Tabliczka z zaklęciem stworzona",
+  "UNRECOGNIZED_ENCHANTMENT" : "Nieznane zaklęcie",
+  "UNRECOGNIZED_SIGN_TYPE" : "Nieznany rodzaj tabliczki",
+  "CANT_ENCHANT" : "Nie możesz ulepszyć tego przedmiotu tym zaklęciem",
+  "MAX_ENCHANT_LEVEL_REACHED" : "Osiągnięto maksymalny poziom zaklęcia!",
+  "ENCHANT_COLLISION" : "Te zaklęcie koliduje z innym zaklęciem",
+  "UPGRADE_INFO" : "Naciśnij ponownie by ulepszyć zaklęcie ${enchant} do ${level} za ${cost}$ z ${chance} szansą",
+  "UPGRADED_SUCCESSFULLY" : "Poprawnie ulepszono zaklęcie do ${enchant} ${level}",
+  "UPGRADE_FAILED" : "Ulepszenie zaklęcia nie powiodło się",
+  "UPGRADE_FAILED_WITH_DOWNGRADE" : "Ulepszenie zaklęcia nie powiodło się, zaklęcie zostało obniżone do ${enchant} ${level}",
+  "DOWNGRADED_SUCCESSFULLY" : "Poprawnie obniżono zaklęcie do ${enchant} ${level}",
+  "DOWNGRADE_INFO" : "Naciśnij ponownie by obniżyć zaklęcie ${enchant} do ${level} za ${cost}$",
+  "ITEM_MISSING_ENCHANT" : "Brak zaklęcia w tym przedmiocie",
+  "NOT_ENOUGH_MONEY" : "Nie masz wystarczającej ilości pieniędzy",
+  "RANDOM_INFO" : "Ulepszenie losowego zaklęcia dla tego przedmiotu będzie kosztować ${cost}",
+  "RANDOM_TOO_FEW_ENCHANTMENTS_TO_ROLL" : "Przedmiot posiada zbyt dużo zaklęć by wylosować losowe zaklęcie",
+  "RANDOM_SUCCESSFULLY" : "Dodano losowe zaklęcie: ${enchant} ${level}"
+}

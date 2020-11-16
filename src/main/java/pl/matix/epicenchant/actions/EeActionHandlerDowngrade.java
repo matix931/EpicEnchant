@@ -36,7 +36,7 @@ public class EeActionHandlerDowngrade extends EeActionHandler<EeConfigActionDown
 
     @Override
     public void performAction(EpicEnchant ee, Player player, ItemStack is, Enchantment e, int currentEnchantLevel, EeConfigActionDowngrade config) {
-        long cost = EeCostsCalculator.calculateDowngradeCost(ee, e, currentEnchantLevel);
+        long cost = EeCostsCalculator.calculateDowngradeCost(ee, player, e, currentEnchantLevel);
         double playerMoney = ee.getEconomy().getBalance(player);
         if(playerMoney < cost) {
             ee.sendChatMessage(player, EeLocale.NOT_ENOUGH_MONEY);
@@ -56,7 +56,7 @@ public class EeActionHandlerDowngrade extends EeActionHandler<EeConfigActionDown
     @Override
     public void showInfoAction(EpicEnchant ee, Player player, ItemStack is, Enchantment e, int currentEnchantLevel, EeConfigActionDowngrade config) {
         String eName = ee.getEnchantRegistry().getPrettyName(e);
-        long cost = EeCostsCalculator.calculateDowngradeCost(ee, e, currentEnchantLevel);
+        long cost = EeCostsCalculator.calculateDowngradeCost(ee, player, e, currentEnchantLevel);
         final String lvl = EnchantmentsRegistry.formatLevel(currentEnchantLevel-1);
         Map<String, String> params = new HashMap<>();
         params.put("enchant", eName);

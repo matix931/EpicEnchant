@@ -5,6 +5,7 @@
  */
 package pl.matix.epicenchant.config;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import java.util.Map;
 import pl.matix.epicenchant.actions.EeActionType;
@@ -27,6 +28,16 @@ public class EeConfigEnchantEntry {
 
     public void setActions(Map<EeActionType, EeConfigAction> actions) {
         this.actions = actions;
+    }
+    
+    @JsonIgnore
+    public EeConfigActionUpgrade getActionUpgrade() {
+        return (EeConfigActionUpgrade) actions.get(EeActionType.UPGRADE);
+    }
+    
+    @JsonIgnore
+    public EeConfigActionDowngrade getActionDowngrade() {
+        return (EeConfigActionDowngrade) actions.get(EeActionType.DOWNGRADE);
     }
 
 }

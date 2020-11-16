@@ -6,14 +6,22 @@
 package pl.matix.epicenchant.enchants;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 import org.apache.commons.lang.WordUtils;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import pl.matix.epicenchant.EpicEnchant;
+import pl.matix.epicenchant.config.EeConfigActionUpgrade;
+import pl.matix.epicenchant.config.EeConfigEnchantEntry;
+import pl.matix.epicenchant.config.EeConfigRandom;
 
 /**
  *
@@ -36,12 +44,14 @@ public class EnchantmentsRegistry {
     private final Map<String, Enchantment> otherEnchants = new HashMap<>();
     private final Map<Enchantment, String> enchantsPrettyNames = new HashMap<>();
     
+    public final RandomEnchantment RANDOM;
     public final DestroyerEnchantment DESTROYER;
     
     private EpicEnchant ee;
 
     public EnchantmentsRegistry(EpicEnchant ee) throws Exception {
         this.ee = ee;
+        this.RANDOM = createCustomEnchantment(RandomEnchantment.class);
         this.DESTROYER = createCustomEnchantment(DestroyerEnchantment.class);
         
         init();
@@ -58,6 +68,10 @@ public class EnchantmentsRegistry {
             registerPrettyName(e);
         });
         byKeyField.setAccessible(false);
+    }
+    
+    public void initAfterConfigLoad() {
+        
     }
     
     private <T extends EeCustomEnchantment> T createCustomEnchantment(Class<T> clz) throws Exception {
@@ -97,6 +111,46 @@ public class EnchantmentsRegistry {
         return null;
     }
     
+    public List<Enchantment> getAvailableEnchantmentsForRandom(ItemStack is) {
+        List<Enchantment> list = new ArrayList<>();
+        ItemMeta meta = is.getItemMeta();
+        if(meta != null) {
+            List<Enchantment> maxedEnchants = new ArrayList<>();
+            List<Enchantment> allEnchants = new ArrayList<>();
+            for(Map.Entry<Enchantment, Integer> ent : meta.getEnchants().entrySet()) {
+                EeConfigEnchantEntry conf = ee.getEeConfig().getEnchantmentConfig(ent.getKey());
+                EeConfigActionUpgrade actionUpgrade = conf.getActionUpgrade();
+                if(ent.getValue() <= 0) {
+                    continue;
+                }
+                if(ent.getValue() >= actionUpgrade.getMaxLevel()) {
+                    maxedEnchants.add(ent.getKey());
+                }
+                allEnchants.add(ent.getKey());
+            }
+            
+            List<Enchantment> allAvailableEnchantments = getAllAvailableEnchantments();
+            for(Enchantment e : allAvailableEnchantments) {
+                EeConfigEnchantEntry conf = ee.getEeConfig().getEnchantmentConfig(e);
+                EeConfigActionUpgrade actionUpgrade = conf.getActionUpgrade();
+                if(actionUpgrade.getRandomWeight() <= 0) {
+                    continue;
+                }
+                if(maxedEnchants.contains(e)) {
+                    continue;
+                }
+                if(!e.canEnchantItem(is)) {
+                    continue;
+                }
+                if(ee.getEnchantments().isConflicting(is, e)) {
+                    continue;
+                }
+                list.add(e);
+            }
+        }
+        return list;
+    }
+    
     private void registerPrettyName(Enchantment e) {
         enchantsPrettyNames.put(e, WordUtils.capitalizeFully(e.getKey().getKey().replace("_", " ")));
     }
@@ -111,6 +165,15 @@ public class EnchantmentsRegistry {
 
     public Map<String, Enchantment> getOtherEnchants() {
         return otherEnchants;
+    }
+    
+    public List<Enchantment> getAllAvailableEnchantments() {
+        List<Enchantment> list = new ArrayList<>();
+        list.addAll(otherEnchants.values());
+        list.addAll(customEnchants.stream()
+                .filter(ce -> !ce.equals(RANDOM))
+                .collect(Collectors.toList()));
+        return list;
     }
     
 }

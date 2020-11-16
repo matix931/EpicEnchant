@@ -5,7 +5,12 @@
  */
 package pl.matix.epicenchant.actions;
 
+import java.util.List;
+import java.util.Map;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import pl.matix.epicenchant.EpicEnchant;
 import pl.matix.epicenchant.config.EeConfig;
 import pl.matix.epicenchant.config.EeConfigActionDowngrade;
@@ -13,6 +18,8 @@ import pl.matix.epicenchant.config.EeConfigActionUpgrade;
 import pl.matix.epicenchant.config.EeConfigActionUpgradeCosts;
 import pl.matix.epicenchant.config.EeConfigEnchantEntry;
 import pl.matix.epicenchant.config.EeConfigGlobalUpgradeCosts;
+import pl.matix.epicenchant.config.EeConfigRandom;
+import pl.matix.epicenchant.permissions.EpicEnchantPermission;
 
 /**
  *
@@ -20,13 +27,33 @@ import pl.matix.epicenchant.config.EeConfigGlobalUpgradeCosts;
  */
 public class EeCostsCalculator {
     
-    public static long calculateDowngradeCost(EpicEnchant ee, Enchantment e, int currentEnchantLevel) {
+    public static long calculateRandomCost(EpicEnchant ee, Player player, ItemStack is) {
+        EeConfig c = ee.getEeConfig();
+        EeConfigRandom randomConfig = c.getRandom();
+        
+        ItemMeta meta = is.getItemMeta();
+        long costSum = 0;
+        List<Enchantment> availableEnchantmentsFor = ee.getEnchantRegistry().getAvailableEnchantmentsForRandom(is);
+        for(Enchantment e : availableEnchantmentsFor) {
+            int level = meta.getEnchantLevel(e);
+            long cost = calculateUpgradeCost(ee, player, e, level);
+            costSum += cost;
+        }
+        long minCost = randomConfig.getMinCost()==null ? 0 : randomConfig.getMinCost();
+        long maxCost = randomConfig.getMaxCost()==null ? Long.MAX_VALUE : randomConfig.getMaxCost();
+        double costMultiplier = randomConfig.getCostMultiplier()==null ? 1 : randomConfig.getCostMultiplier();
+        
+        int amount = availableEnchantmentsFor.size();
+        return (long) Math.min(Math.max((costSum / amount) * costMultiplier, minCost), maxCost);
+    }
+    
+    public static long calculateDowngradeCost(EpicEnchant ee, Player player, Enchantment e, int currentEnchantLevel) {
         EeConfig c = ee.getEeConfig();
         EeConfigEnchantEntry eConfig = c.getEnchantmentConfig(e);
         EeConfigActionDowngrade aConfig = (EeConfigActionDowngrade) eConfig.getActions().get(EeActionType.DOWNGRADE);
         
         double downgradeCostPart = c.getGlobalDowngradeCostPart();
-        double cost = downgradeCostPart * calculateUpgradeCost(ee, e, currentEnchantLevel);
+        double cost = downgradeCostPart * calculateUpgradeCost(ee, player, e, currentEnchantLevel);
         if(aConfig != null) {
             if(aConfig.getCostPartModifier() != null) {
                 cost *= aConfig.getCostPartModifier();
@@ -36,7 +63,7 @@ public class EeCostsCalculator {
         return (long) cost;
     }
     
-    public static long calculateUpgradeCost(EpicEnchant ee, Enchantment e, int currentEnchantLevel) {
+    public static long calculateUpgradeCost(EpicEnchant ee, Player player, Enchantment e, int currentEnchantLevel) {
         EeConfig c = ee.getEeConfig();
         EeConfigEnchantEntry eConfig = c.getEnchantmentConfig(e);
         EeConfigActionUpgrade aConfig = (EeConfigActionUpgrade) eConfig.getActions().get(EeActionType.UPGRADE);
@@ -69,7 +96,19 @@ public class EeCostsCalculator {
             }
         }
         
-        return (long) (minValue + (Math.pow(currentEnchantLevel, levelPower) * levelMultiplier));
+        long cost = (long) (minValue + (Math.pow(currentEnchantLevel, levelPower) * levelMultiplier));
+        
+        if(EpicEnchantPermission.has(player, EpicEnchantPermission.UPGRADE_COST_25)) {
+            cost *= 0.25;
+        } else if(EpicEnchantPermission.has(player, EpicEnchantPermission.UPGRADE_COST_50)) {
+            cost *= 0.5;
+        } else if(EpicEnchantPermission.has(player, EpicEnchantPermission.UPGRADE_COST_75)) {
+            cost *= 0.75;
+        } else if(EpicEnchantPermission.has(player, EpicEnchantPermission.UPGRADE_COST_90)) {
+            cost *= 0.90;
+        }
+        
+        return cost;
     }
     
 }

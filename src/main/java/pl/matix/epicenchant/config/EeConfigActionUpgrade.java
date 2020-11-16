@@ -12,6 +12,7 @@ package pl.matix.epicenchant.config;
 public class EeConfigActionUpgrade extends EeConfigAction {
     
     private int maxLevel;
+    private int randomWeight;
     private EeConfigActionUpgradeCosts costs;
     private EeConfigActionUpgradeChances chances;
     private Boolean downgradeOnFail;
@@ -46,6 +47,14 @@ public class EeConfigActionUpgrade extends EeConfigAction {
 
     public void setDowngradeOnFail(Boolean downgradeOnFail) {
         this.downgradeOnFail = downgradeOnFail;
+    }
+
+    public int getRandomWeight() {
+        return randomWeight;
+    }
+
+    public void setRandomWeight(int randomWeight) {
+        this.randomWeight = randomWeight;
     }
    
 }

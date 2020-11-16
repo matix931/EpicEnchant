@@ -30,7 +30,10 @@ public class SignHelper {
     }
     
     public EeActionType getSignType(String[] signLines) {
-        return EeActionType.fromString(signLines[2]);
+        if(signLines[2] == null || signLines[2].trim().isEmpty()) {
+            return EeActionType.UPGRADE;
+        }
+        return EeActionType.fromPrefix(signLines[2]);
     }
     
     public Enchantment getEnchantmentFromSign(String[] signLines) {
@@ -38,8 +41,13 @@ public class SignHelper {
     }
     
     public void updateSignLines(String[] signLines, Enchantment e, EeActionType signType) {
+        String enchantmentName = ee.getEnchantRegistry().getPrettyName(e);
+        if(enchantmentName.length() > 15) {
+            enchantmentName = enchantmentName.substring(0, 15);
+        }
+        
         signLines[0] = ee.getSignPrefixColored();
-        signLines[1] = ee.getEnchantRegistry().getPrettyName(e).substring(0,15);
+        signLines[1] = enchantmentName;
         signLines[2] = signType.name();
         signLines[3] = "";
     }

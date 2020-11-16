@@ -8,7 +8,6 @@ package pl.matix.epicenchant.config;
 import java.util.HashMap;
 import java.util.Map;
 import org.bukkit.enchantments.Enchantment;
-import pl.matix.epicenchant.locale.LocaleLanguage;
 
 /**
  *
@@ -16,24 +15,25 @@ import pl.matix.epicenchant.locale.LocaleLanguage;
  */
 public class EeConfig {
     
-    private LocaleLanguage language = LocaleLanguage.EN;
+    private String language;
     
     private EeConfigGlobalUpgradeCosts globalUpgradeCosts;
     private EeConfigGlobalUpgradeChances globalUpgradeChances;
     private double globalDowngradeCostPart;
     private Boolean globalUpgradeDowngradeOnFail;
+    private EeConfigRandom random;
     
     private Map<String, EeConfigEnchantEntry> enchantments = new HashMap<>();
 
     public EeConfig() {
         
     }
-    
-    public void setLanguage(LocaleLanguage language) {
+
+    public void setLanguage(String language) {
         this.language = language;
     }
 
-    public LocaleLanguage getLanguage() {
+    public String getLanguage() {
         return language;
     }
 
@@ -79,6 +79,14 @@ public class EeConfig {
 
     public void setGlobalUpgradeDowngradeOnFail(Boolean globalUpgradeDowngradeOnFail) {
         this.globalUpgradeDowngradeOnFail = globalUpgradeDowngradeOnFail;
+    }
+
+    public EeConfigRandom getRandom() {
+        return random;
+    }
+
+    public void setRandom(EeConfigRandom random) {
+        this.random = random;
     }
     
 }

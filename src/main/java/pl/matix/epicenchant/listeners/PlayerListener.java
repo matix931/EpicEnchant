@@ -26,6 +26,8 @@ import pl.matix.epicenchant.config.EeConfigAction;
 import pl.matix.epicenchant.config.EeConfigEnchantEntry;
 import pl.matix.epicenchant.actions.EeActionHandler;
 import pl.matix.epicenchant.actions.EeActionType;
+import pl.matix.epicenchant.locale.EeLocale;
+import pl.matix.epicenchant.permissions.EpicEnchantPermission;
 
 /**
  *
@@ -67,6 +69,11 @@ public class PlayerListener extends EeListener {
                 return;
             }
             
+            if(!EpicEnchantPermission.has(player, EpicEnchantPermission.SIGN_USE)) {
+                ee.sendChatMessage(player, EeLocale.NO_PERMISSION);
+                return;
+            }
+            
             final String[] lines = sign.getLines();
             final ItemStack itemInHand = player.getInventory().getItemInMainHand();
             final ItemMeta itemMeta = itemInHand.getItemMeta();
@@ -78,7 +85,7 @@ public class PlayerListener extends EeListener {
             final EeActionType actionType = ee.getSignHelper().getSignType(lines);
             final EeConfigEnchantEntry config = ee.getEeConfig().getEnchantmentConfig(enchantment);
             final EeActionHandler actionHandler = actionType.getActionHandler();
-            final EeConfigAction actionConfig = config.getActions().get(actionType);
+            final EeConfigAction actionConfig = config == null ? null : config.getActions().get(actionType);
             
             if(!actionHandler.validateBeforeAction(ee, player, itemInHand, enchantment, currentEnchantLevel, actionConfig)) {
                 return;

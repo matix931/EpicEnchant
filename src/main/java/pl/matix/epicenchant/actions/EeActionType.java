@@ -37,6 +37,19 @@ public enum EeActionType {
         }
         return map.get(st.trim().toUpperCase());
     }
+    
+    public static EeActionType fromPrefix(String st) {
+        if(st==null) {
+            return null;
+        }
+        st = st.trim().toUpperCase();
+        for(EeActionType at : map.values()) {
+            if(at.name().startsWith(st)) {
+                return at;
+            }
+        }
+        return null;
+    }
 
     public EeActionHandler getActionHandler() {
         return actionHandler;

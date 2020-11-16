@@ -8,13 +8,17 @@ package pl.matix.epicenchant.enchants;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
+import org.apache.commons.lang3.tuple.Pair;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import pl.matix.epicenchant.EpicEnchant;
+import pl.matix.epicenchant.config.EeConfigActionUpgrade;
 import pl.matix.epicenchant.config.EeConfigEnchantEntry;
 
 /**
@@ -35,7 +39,11 @@ public class EeEnchantmentsManager {
         f.set(null, true);
         f.setAccessible(false);
         
-        ee.getEnchantRegistry().getCustomEnchants().forEach(e -> Enchantment.registerEnchantment(e));
+        ee.getEnchantRegistry().getCustomEnchants().forEach(e -> {
+            if(!e.equals(ee.getEnchantRegistry().RANDOM)) {
+                Enchantment.registerEnchantment(e);
+            }
+        });
         Enchantment.stopAcceptingRegistrations();
     }
     
@@ -84,10 +92,12 @@ public class EeEnchantmentsManager {
     }
     
     public void upgradeEnchantment(ItemStack is, Enchantment e, int plusLevels) {
+        EeConfigEnchantEntry conf = ee.getEeConfig().getEnchantmentConfig(e);
+        EeConfigActionUpgrade actionUpgrade = conf.getActionUpgrade();
         ItemMeta meta = is.getItemMeta();
         int level = meta.getEnchantLevel(e);
         level += plusLevels;
-        level = Math.min(level, 127);
+        level = Math.min(level, actionUpgrade.getMaxLevel());
         if(level <= 0) {
             meta.removeEnchant(e);
         } else {
@@ -99,12 +109,37 @@ public class EeEnchantmentsManager {
         is.setItemMeta(meta);
     }
     
-    public boolean isConflicting(ItemStack is, Enchantment newEnchantment) {
+    public Enchantment upgradeRandomEnchantment(ItemStack is) {
+        List<Enchantment> availableEnchantmentsFor = ee.getEnchantRegistry().getAvailableEnchantmentsForRandom(is);
+        Map<Pair<Long, Long>, Enchantment> weightsMap = new LinkedHashMap<>();
+        long x = 0;
+        for(Enchantment e : availableEnchantmentsFor) {
+            EeConfigEnchantEntry conf = ee.getEeConfig().getEnchantmentConfig(e);
+            EeConfigActionUpgrade actionUpgrade = conf.getActionUpgrade();
+            int randomWeight = actionUpgrade.getRandomWeight();
+            Pair<Long, Long> range = Pair.of(x, x + randomWeight - 1);
+            weightsMap.put(range, e);
+            x += randomWeight;
+        }
+        long random = (long) (Math.random() * x);
+        Enchantment e = null;
+        for(Map.Entry<Pair<Long, Long>, Enchantment> ent : weightsMap.entrySet()) {
+            Pair<Long, Long> range = ent.getKey();
+            if(random >= range.getLeft() && random <= range.getRight()) {
+                e = ent.getValue();
+                break;
+            }
+        }
+        upgradeEnchantment(is, e, 1);
+        return e;
+    }
+    
+    public boolean isConflicting(ItemStack is, Enchantment e) {
         ItemMeta meta = is.getItemMeta();
         
         for(Map.Entry<Enchantment, Integer> ent : meta.getEnchants().entrySet()) {
-            if(ent.getValue() > 0) {
-                if(newEnchantment.conflictsWith(ent.getKey())) {
+            if(ent.getValue() > 0 && !ent.getKey().equals(e)) {
+                if(e.conflictsWith(ent.getKey())) {
                     return true;
                 }
             }
