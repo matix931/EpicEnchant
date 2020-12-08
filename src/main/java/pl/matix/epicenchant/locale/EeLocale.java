@@ -31,7 +31,14 @@ public enum EeLocale {
     NOT_ENOUGH_MONEY("You do not have enough money"),
     RANDOM_INFO("Random enchantment upgrade for this item will cost ${cost}"),
     RANDOM_TOO_FEW_ENCHANTMENTS_TO_ROLL("There are too few enchantments to roll random enchantment"),
-    RANDOM_SUCCESSFULLY("Random enchantment applied: ${enchant} ${level}")
+    RANDOM_SUCCESSFULLY("Random enchantment applied: ${enchant} ${level}"),
+    
+    CMD_NO_PERMISSION("You don't have permission to use that command"),
+    CMD_DESCRIPTION("EpicEnchant commands"),
+    CMD_USAGE("/epicenchant <subcommand>"),
+    
+    CMD_RELOAD_SUCCESS("Config reloaded"),
+    CMD_RELOAD_FAILED("Config reload failed")
     ;
     
     public static final Map<String, EeLocale> map = new HashMap<>();

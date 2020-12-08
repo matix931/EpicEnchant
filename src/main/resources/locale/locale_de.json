@@ -17,4 +17,9 @@
   "RANDOM_INFO" : "Ein zufälliges Verzauberungs-Upgrade für diesen Gegenstand kostet ${cost}",
   "RANDOM_TOO_FEW_ENCHANTMENTS_TO_ROLL" : "Es gibt zu wenig Verzauberungen, um zufällige Verzauberungen zu würfeln",
   "RANDOM_SUCCESSFULLY" : "Zufällige Verzauberung angewendet: ${enchant} ${level}"
+  "CMD_NO_PERMISSION" : "Sie haben keine Berechtigung, diesen Befehl zu verwenden",
+  "CMD_DESCRIPTION" : "EpicEnchant-Befehle",
+  "CMD_USAGE" : "/epicenchant <Unterbefehl>",
+  "CMD_RELOAD_SUCCESS" : "Konfiguration neu geladen",
+  "CMD_RELOAD_FAILED" : "Das Neuladen der Konfiguration ist fehlgeschlagen"
 }

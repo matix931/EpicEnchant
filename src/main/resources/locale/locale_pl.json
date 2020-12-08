@@ -17,4 +17,9 @@
   "RANDOM_INFO" : "Ulepszenie losowego zaklęcia dla tego przedmiotu będzie kosztować ${cost}",
   "RANDOM_TOO_FEW_ENCHANTMENTS_TO_ROLL" : "Przedmiot posiada zbyt dużo zaklęć by wylosować losowe zaklęcie",
   "RANDOM_SUCCESSFULLY" : "Dodano losowe zaklęcie: ${enchant} ${level}"
+  "CMD_NO_PERMISSION" : "Nie masz uprawnień by użyć tej komendy.",
+  "CMD_DESCRIPTION" : "Polecenia EpicEnchant",
+  "CMD_USAGE" : "/epicenchant <podkomenda>",
+  "CMD_RELOAD_SUCCESS" : "Plik konfiguracyjny przładowany",
+  "CMD_RELOAD_FAILED" : "Nie udało się przeładować pliku konfiguracyjnego"
 }

@@ -6,7 +6,6 @@
 package pl.matix.epicenchant.actions;
 
 import java.util.List;
-import java.util.Map;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -98,14 +97,10 @@ public class EeCostsCalculator {
         
         long cost = (long) (minValue + (Math.pow(currentEnchantLevel, levelPower) * levelMultiplier));
         
-        if(EpicEnchantPermission.has(player, EpicEnchantPermission.UPGRADE_COST_25)) {
-            cost *= 0.25;
-        } else if(EpicEnchantPermission.has(player, EpicEnchantPermission.UPGRADE_COST_50)) {
-            cost *= 0.5;
-        } else if(EpicEnchantPermission.has(player, EpicEnchantPermission.UPGRADE_COST_75)) {
-            cost *= 0.75;
-        } else if(EpicEnchantPermission.has(player, EpicEnchantPermission.UPGRADE_COST_90)) {
-            cost *= 0.90;
+        
+        Integer value = EpicEnchantPermission.getBestUpgradeCostPermission(player);
+        if(value != null) {
+            cost *= 0.01 * value;
         }
         
         return cost;

@@ -183,15 +183,10 @@ public class EeActionHandlerUpgrade extends EeActionHandler<EeConfigActionUpgrad
         
         int chance = (int) (100 - (Math.pow(currentEnchantLevel, levelPower) * levelMultiplier));
         
-        if(EpicEnchantPermission.has(player, EpicEnchantPermission.UPGRADE_CHANCE_500)) {
-            chance *= 5;
-        } else if(EpicEnchantPermission.has(player, EpicEnchantPermission.UPGRADE_CHANCE_300)) {
-            chance *= 3;
-        } else if(EpicEnchantPermission.has(player, EpicEnchantPermission.UPGRADE_CHANCE_200)) {
-            chance *= 2;
-        } else if(EpicEnchantPermission.has(player, EpicEnchantPermission.UPGRADE_CHANCE_150)) {
-            chance *= 1.5;
-        }
+        Integer value = EpicEnchantPermission.getBestUpgradeChancePermission(player);
+        if(value != null) {
+            chance *= 0.01 * value;
+        }        
         
         return Math.min(Math.max(chance, (int) minValue), 100);
     }

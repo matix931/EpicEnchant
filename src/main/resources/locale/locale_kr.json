@@ -1,0 +1,25 @@
+{
+  "NO_PERMISSION" : "허가가 없으십니다.",
+  "CREATE_SIGN_SUCCESS" : "마법의 간판이 생성됨!",
+  "UNRECOGNIZED_ENCHANTMENT" : "인식할 수 없는 마법",
+  "UNRECOGNIZED_SIGN_TYPE" : "인식할 수 없는 기호 유형",
+  "CANT_ENCHANT" : "너는 그 마법으로 이 아이템을 매혹시킬 수 없다.",
+  "MAX_ENCHANT_LEVEL_REACHED" : "최대 마법 수준에 도달!",
+  "ENCHANT_COLLISION" : "이 마법은 다른 마법과 충돌한다.",
+  "UPGRADE_INFO" : "${cost}$에서 ${chance} 확률로 ${enchant}를 ${level}(으)로 업그레이드하려면 다시 클릭하십시오.",
+  "UPGRADED_SUCCESSFULLY" : "마법이 ${enchant} ${level}로 업그레이드됨",
+  "UPGRADE_FAILED" : "마법 업그레이드 실패",
+  "UPGRADE_FAILED_WITH_DOWNGRADE" : "마법 업그레이드 실패, 마법이 ${enchant} ${level}로 다운그레이드됨",
+  "DOWNGRADED_SUCCESSFULLY" : "마법사가 ${enchant} ${level}(으)로 다운그레이드됨",
+  "DOWNGRADE_INFO" : "${cost}$에 대해 ${enchant}에서 ${level}}로 다운그레이드하려면 다시 클릭하십시오.",
+  "ITEM_MISSING_ENCHANT" : "항목에 이 마법이 누락됨",
+  "NOT_ENOUGH_MONEY" : "너는 충분한 돈을 가지고 있지 않다.",
+  "RANDOM_INFO" : "이 항목의 랜덤 마법 업그레이드에 ${cost}가 소요됨",
+  "RANDOM_TOO_FEW_ENCHANTMENTS_TO_ROLL" : "무작위로 마법을 걸기에는 마법이 너무 적다.",
+  "RANDOM_SUCCESSFULLY" : "무작위 마법 적용: ${enchant} ${level}"
+  "CMD_NO_PERMISSION" : "해당 명령을 사용할 수 있는 권한이 없음",
+  "CMD_DESCRIPTION" : "EpicEnchant 명령",
+  "CMD_USAGE" : "/epicenchant <하위 명령>",
+  "CMD_RELOAD_SUCCESS" : "구성이 다시 로드됨",
+  "CMD_RELOAD_FAILED" : "구성 다시 로드 실패"
+}

@@ -15,10 +15,16 @@ import java.util.logging.Logger;
 import net.milkbowl.vault.economy.Economy;
 import org.apache.commons.io.FileUtils;
 import org.bukkit.Server;
+import org.bukkit.command.CommandSender;
+import org.bukkit.command.PluginCommand;
 import org.bukkit.entity.Player;
+import org.bukkit.permissions.Permission;
+import org.bukkit.permissions.PermissionDefault;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
+import pl.matix.epicenchant.commands.EeCommand;
+import pl.matix.epicenchant.commands.EeCommandsManager;
 import pl.matix.epicenchant.config.EeConfig;
 import pl.matix.epicenchant.enchants.EnchantmentsRegistry;
 import pl.matix.epicenchant.enchants.EeEnchantmentsManager;
@@ -29,6 +35,7 @@ import pl.matix.epicenchant.listeners.PlayerListener;
 import pl.matix.epicenchant.listeners.SignCreateListener;
 import pl.matix.epicenchant.locale.EeLocale;
 import pl.matix.epicenchant.locale.EeLocaleFile;
+import pl.matix.epicenchant.permissions.EpicEnchantPermission;
 import pl.matix.epicenchant.sign.SignHelper;
 
 /**
@@ -58,6 +65,7 @@ public class EpicEnchant extends JavaPlugin {
     private SignHelper signHelper;
     private EnchantmentsRegistry enchantRegistry;
     private EeEnchantmentsManager enchantments;
+    private EeCommandsManager commandsManager;
     
     public EpicEnchant() {
         this.server = getServer();
@@ -103,8 +111,6 @@ public class EpicEnchant extends JavaPlugin {
             return;
         }
         
-        this.enchantRegistry.initAfterConfigLoad();
-        
         try {
             loadLocale();
         } catch (IOException ex) {
@@ -131,6 +137,9 @@ public class EpicEnchant extends JavaPlugin {
             pm.disablePlugin(this);
             return;
         }
+        
+        setupCommands();
+        setupPermissions();        
     }
 
     @Override
@@ -169,6 +178,26 @@ public class EpicEnchant extends JavaPlugin {
         showConsoleInfo("Listeners registered");
     }
     
+    private void setupCommands() {
+        PluginCommand command = getCommand("epicenchant");
+        command.setDescription(EeLocale.CMD_DESCRIPTION.getText());
+        command.setUsage(EeLocale.CMD_USAGE.getText());
+        commandsManager = new EeCommandsManager(this);
+        command.setTabCompleter(commandsManager);
+        command.setExecutor(commandsManager);
+    }
+    
+    private void setupPermissions() {
+        EpicEnchantPermission[] perms = EpicEnchantPermission.values();
+        for(EpicEnchantPermission p : perms) {
+            pm.addPermission(p.toPermission());
+        }
+        for(EeCommand cmd : commandsManager.getCmds().values()) {
+            Permission perm = new Permission(cmd.getPermission(), cmd.getDefaultPermission());
+            pm.addPermission(perm);
+        }
+    }
+    
     private void registerListener(Class<? extends EeListener> listener) throws Exception {
         EeListener ll = listener.getConstructor(EpicEnchant.class).newInstance(this);
         pm.registerEvents(ll, this);
@@ -201,6 +230,18 @@ public class EpicEnchant extends JavaPlugin {
     public void sendChatMessage(Player player, EeLocale locale, Map<String, String> params) {
         player.sendMessage(String.format("%s %s", messagePrefix, locale.getText(params)));
     }
+    
+    public void sendMessage(CommandSender cs, EeLocale locale) {
+        cs.sendMessage(String.format("%s %s", messagePrefix, locale.getText()));
+    }
+    
+    public void sendMessage(CommandSender cs, EeLocale locale, Map<String, String> params) {
+        cs.sendMessage(String.format("%s %s", messagePrefix, locale.getText(params)));
+    }
+    
+    public void sendMessage(CommandSender cs, String msg) {
+        cs.sendMessage(String.format("%s %s", messagePrefix, msg));
+    }
 
     public String getSignPrefix() {
         return signPrefix;
@@ -225,6 +266,8 @@ public class EpicEnchant extends JavaPlugin {
         showConsoleInfo("Loading configuration file");
         config = om.readValue(configFile, EeConfig.class);    
         showConsoleInfo("Configuration file loaded");
+        
+        enchantRegistry.initAfterConfigLoad();
     }
 
     private void loadLocale() throws IOException {
@@ -241,9 +284,25 @@ public class EpicEnchant extends JavaPlugin {
             enLocaleFile.createNewFile();
             EeLocaleFile locale = EeLocaleFile.createDefault();
             om.writerWithDefaultPrettyPrinter().writeValue(enLocaleFile, locale);
+        } else {
+            //append missing entries
+            EeLocaleFile locale = om.readValue(enLocaleFile, EeLocaleFile.class);
+            boolean modified = false;
+            for(Map.Entry<String, EeLocale> ent : EeLocale.map.entrySet()) {
+                EeLocale l = ent.getValue();
+                String s = locale.get(l);
+                if(s == null || s.isEmpty()) {
+                    locale.put(l, l.getText());
+                    modified = true;
+                }
+            }
+            if(modified) {
+                //save changes
+                om.writerWithDefaultPrettyPrinter().writeValue(enLocaleFile, locale);
+            }
         }
         
-        String[] additionalLangs = new String[] { "pl", "de" };
+        String[] additionalLangs = new String[] { "pl", "de", "kr" };
         for(String lang : additionalLangs) {
             final String subPath = "/locale/locale_"+lang+".json";
             File adLoc = new File(pluginFolderPath + subPath);
@@ -262,6 +321,17 @@ public class EpicEnchant extends JavaPlugin {
         locale.forEach((l, txt) -> {
             l.setText(txt);
         });
+    }
+    
+    public boolean reloadEeConfig() {
+        try {
+            loadConfig();
+            loadLocale();
+            return true;
+        } catch (IOException ex) {
+            Logger.getLogger(EpicEnchant.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
     }
 
     public SignHelper getSignHelper() {
