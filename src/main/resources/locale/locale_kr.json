@@ -16,7 +16,7 @@
   "NOT_ENOUGH_MONEY" : "너는 충분한 돈을 가지고 있지 않다.",
   "RANDOM_INFO" : "이 항목의 랜덤 마법 업그레이드에 ${cost}가 소요됨",
   "RANDOM_TOO_FEW_ENCHANTMENTS_TO_ROLL" : "무작위로 마법을 걸기에는 마법이 너무 적다.",
-  "RANDOM_SUCCESSFULLY" : "무작위 마법 적용: ${enchant} ${level}"
+  "RANDOM_SUCCESSFULLY" : "무작위 마법 적용: ${enchant} ${level}",
   "CMD_NO_PERMISSION" : "해당 명령을 사용할 수 있는 권한이 없음",
   "CMD_DESCRIPTION" : "EpicEnchant 명령",
   "CMD_USAGE" : "/epicenchant <하위 명령>",

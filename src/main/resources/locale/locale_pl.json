@@ -16,7 +16,7 @@
   "NOT_ENOUGH_MONEY" : "Nie masz wystarczającej ilości pieniędzy",
   "RANDOM_INFO" : "Ulepszenie losowego zaklęcia dla tego przedmiotu będzie kosztować ${cost}",
   "RANDOM_TOO_FEW_ENCHANTMENTS_TO_ROLL" : "Przedmiot posiada zbyt dużo zaklęć by wylosować losowe zaklęcie",
-  "RANDOM_SUCCESSFULLY" : "Dodano losowe zaklęcie: ${enchant} ${level}"
+  "RANDOM_SUCCESSFULLY" : "Dodano losowe zaklęcie: ${enchant} ${level}",
   "CMD_NO_PERMISSION" : "Nie masz uprawnień by użyć tej komendy.",
   "CMD_DESCRIPTION" : "Polecenia EpicEnchant",
   "CMD_USAGE" : "/epicenchant <podkomenda>",
