@@ -52,7 +52,7 @@ public class EeCostsCalculator {
         EeConfigActionDowngrade aConfig = (EeConfigActionDowngrade) eConfig.getActions().get(EeActionType.DOWNGRADE);
         
         double downgradeCostPart = c.getGlobalDowngradeCostPart();
-        double cost = downgradeCostPart * calculateUpgradeCost(ee, player, e, currentEnchantLevel);
+        double cost = downgradeCostPart * calculateUpgradeCost(ee, player, e, currentEnchantLevel-1);
         if(aConfig != null) {
             if(aConfig.getCostPartModifier() != null) {
                 cost *= aConfig.getCostPartModifier();

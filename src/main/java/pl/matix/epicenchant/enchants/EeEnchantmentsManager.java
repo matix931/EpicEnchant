@@ -195,7 +195,8 @@ public class EeEnchantmentsManager {
         }
         fromMeta.getEnchants().forEach((e, l) -> {
             if(!onlyCustom || (e instanceof EeCustomEnchantment)) {
-                toMeta.addEnchant(e, l, true);    
+                int lvl = toMeta.getEnchantLevel(e);
+                toMeta.addEnchant(e, Math.max(lvl, l), true);    
             }
         });
         to.setItemMeta(toMeta);

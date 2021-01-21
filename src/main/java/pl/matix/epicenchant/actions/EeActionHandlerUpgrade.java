@@ -71,56 +71,61 @@ public class EeActionHandlerUpgrade extends EeActionHandler<EeConfigActionUpgrad
         
         long cost = randomEnchantment ? EeCostsCalculator.calculateRandomCost(ee, player, is) 
                 : EeCostsCalculator.calculateUpgradeCost(ee, player, e, currentEnchantLevel);
+        
         double playerMoney = ee.getEconomy().getBalance(player);
-        if(playerMoney < cost) {
+        if(cost > 0 && playerMoney < cost) {
             ee.sendChatMessage(player, EeLocale.NOT_ENOUGH_MONEY);
             return;
         }
         
-        if(randomEnchantment) {
-            Enchantment randomEnchant = ee.getEnchantments().upgradeRandomEnchantment(is);
-            ee.getEconomy().withdrawPlayer(player, cost);
-            String eName = ee.getEnchantRegistry().getPrettyName(randomEnchant);
-            int level = is.getItemMeta().getEnchantLevel(randomEnchant);
-            final String lvl = EnchantmentsRegistry.formatLevel(level);
-            Map<String, String> params = new HashMap<>();
-            params.put("enchant", eName);
-            params.put("level", lvl);
-            ee.sendChatMessage(player, EeLocale.RANDOM_SUCCESSFULLY, params);
-            return;
-        }
+        boolean transactionSuccess = ee.getEconomy().withdrawPlayer(player, cost).transactionSuccess();
         
-        int chance = calcChance(ee, player, e, currentEnchantLevel, config);
-        Random r = new Random();
-        int randomNum = 1 + r.nextInt(100);
-        if(randomNum <= chance) {
-            ee.getEnchantments().upgradeEnchantment(is, e, 1);
-            ee.getEconomy().withdrawPlayer(player, cost);
-            String eName = ee.getEnchantRegistry().getPrettyName(e);
-            final String lvl = EnchantmentsRegistry.formatLevel(currentEnchantLevel+1);
-            Map<String, String> params = new HashMap<>();
-            params.put("enchant", eName);
-            params.put("level", lvl);
-            ee.sendChatMessage(player, EeLocale.UPGRADED_SUCCESSFULLY, params);
-        } else {
-            ee.getEconomy().withdrawPlayer(player, cost);
-            boolean downgradeOnFail;
-            if(config.getDowngradeOnFail() != null) {
-                downgradeOnFail = config.getDowngradeOnFail();
-            } else {
-                downgradeOnFail = ee.getEeConfig().getGlobalUpgradeDowngradeOnFail();
-            }
-            if(downgradeOnFail && !EpicEnchantPermission.has(player, EpicEnchantPermission.UPGRADE_FAIL_DOWNGRADE_IMMUNITY)) {
-                ee.getEnchantments().upgradeEnchantment(is, e, -1);
-                String eName = ee.getEnchantRegistry().getPrettyName(e);
-                final String lvl = EnchantmentsRegistry.formatLevel(currentEnchantLevel-1);
+        if(transactionSuccess) {
+            if(randomEnchantment) {
+                Enchantment randomEnchant = ee.getEnchantments().upgradeRandomEnchantment(is);
+                String eName = ee.getEnchantRegistry().getPrettyName(randomEnchant);
+                int level = is.getItemMeta().getEnchantLevel(randomEnchant);
+                final String lvl = EnchantmentsRegistry.formatLevel(level);
                 Map<String, String> params = new HashMap<>();
                 params.put("enchant", eName);
                 params.put("level", lvl);
-                ee.sendChatMessage(player, EeLocale.UPGRADE_FAILED_WITH_DOWNGRADE, params);
-            } else {
-                ee.sendChatMessage(player, EeLocale.UPGRADE_FAILED);    
+                ee.sendChatMessage(player, EeLocale.RANDOM_SUCCESSFULLY, params);
+                return;
             }
+
+            int chance = calcChance(ee, player, e, currentEnchantLevel, config);
+            Random r = new Random();
+            int randomNum = 1 + r.nextInt(100);
+        
+            if(randomNum <= chance) {
+                ee.getEnchantments().upgradeEnchantment(is, e, 1);
+                String eName = ee.getEnchantRegistry().getPrettyName(e);
+                final String lvl = EnchantmentsRegistry.formatLevel(currentEnchantLevel+1);
+                Map<String, String> params = new HashMap<>();
+                params.put("enchant", eName);
+                params.put("level", lvl);
+                ee.sendChatMessage(player, EeLocale.UPGRADED_SUCCESSFULLY, params);
+            } else {
+                boolean downgradeOnFail;
+                if(config.getDowngradeOnFail() != null) {
+                    downgradeOnFail = config.getDowngradeOnFail();
+                } else {
+                    downgradeOnFail = ee.getEeConfig().getGlobalUpgradeDowngradeOnFail();
+                }
+                if(downgradeOnFail && !EpicEnchantPermission.has(player, EpicEnchantPermission.UPGRADE_FAIL_DOWNGRADE_IMMUNITY)) {
+                    ee.getEnchantments().upgradeEnchantment(is, e, -1);
+                    String eName = ee.getEnchantRegistry().getPrettyName(e);
+                    final String lvl = EnchantmentsRegistry.formatLevel(currentEnchantLevel-1);
+                    Map<String, String> params = new HashMap<>();
+                    params.put("enchant", eName);
+                    params.put("level", lvl);
+                    ee.sendChatMessage(player, EeLocale.UPGRADE_FAILED_WITH_DOWNGRADE, params);
+                } else {
+                    ee.sendChatMessage(player, EeLocale.UPGRADE_FAILED);    
+                }
+            }
+        } else {
+            ee.sendChatMessage(player, "Vault transaction failed");
         }
     }
 
