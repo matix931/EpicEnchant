@@ -71,7 +71,7 @@ public class EeActionHandlerDowngrade extends EeActionHandler<EeConfigActionDown
         Map<String, String> params = new HashMap<>();
         params.put("enchant", eName);
         params.put("level", lvl);
-        params.put("cost", String.valueOf(cost));
+        params.put("cost", cost < 0 ? "+"+String.valueOf(-cost) : String.valueOf(cost));
         ee.sendChatMessage(player, EeLocale.DOWNGRADE_INFO, params);
     }
     
