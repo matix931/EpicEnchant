@@ -5,8 +5,6 @@
  */
 package pl.matix.epicenchant.commands;
 
-import java.util.ArrayList;
-import java.util.List;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import pl.matix.epicenchant.EpicEnchant;
