@@ -19,7 +19,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.entity.Player;
 import org.bukkit.permissions.Permission;
-import org.bukkit.permissions.PermissionDefault;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -75,7 +74,7 @@ public class EpicEnchant extends JavaPlugin {
         this.messagePrefix = "§3[§c" + pluginName + "§3]§f";
         this.logPrefix = "\033[0;36m[\033[0;31m" + pluginName + "\033[0;36m]\033[0m";
         this.signPrefix = "[" + pluginName.toLowerCase() + "]";
-        this.signPrefixColored = "§3[§c" + pluginName + "§3]§f";
+        this.signPrefixColored = "§3[§c" + pluginName + "§3]";
         this.pluginFolderPath = "plugins/"+pluginName;
         
         this.signHelper = new SignHelper(this);

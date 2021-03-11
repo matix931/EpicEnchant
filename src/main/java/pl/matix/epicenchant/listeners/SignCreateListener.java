@@ -5,6 +5,7 @@
  */
 package pl.matix.epicenchant.listeners;
 
+import org.bukkit.block.Sign;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -59,7 +60,7 @@ public class SignCreateListener extends EeListener {
             return;
         }
         
-        ee.getSignHelper().updateSignLines(lines, enchantment, signType);
+        ee.getSignHelper().updateSignLines((Sign) event.getBlock().getState(), enchantment, signType);
         ee.sendChatMessage(player, EeLocale.CREATE_SIGN_SUCCESS);
     }
     
